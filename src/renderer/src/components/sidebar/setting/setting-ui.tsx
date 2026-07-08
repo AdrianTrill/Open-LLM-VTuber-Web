@@ -23,7 +23,6 @@ import TTS from './tts';
 import Agent from './agent';
 import Persona from './persona';
 import Knowledge from './knowledge';
-import About from './about';
 
 interface SettingUIProps {
   open: boolean;
@@ -94,9 +93,6 @@ function SettingUI({ open, onClose }: SettingUIProps): JSX.Element {
         <Tabs.Content value="knowledge" {...settingStyles.settingUI.tabs.content}>
           <Knowledge />
         </Tabs.Content>
-        <Tabs.Content value="about" {...settingStyles.settingUI.tabs.content}>
-          <About />
-        </Tabs.Content>
       </Tabs.ContentGroup>
     ),
     [handleSaveCallback, handleCancelCallback],
@@ -140,7 +136,7 @@ function SettingUI({ open, onClose }: SettingUIProps): JSX.Element {
             {...settingStyles.settingUI.tabs.root}
           >
             <Tabs.List {...settingStyles.settingUI.tabs.list}>
-              {(['general', 'live2d', 'asr', 'tts', 'agent', 'persona', 'knowledge', 'about'] as const).map((tab) => (
+              {(['general', 'live2d', 'asr', 'tts', 'agent', 'persona', 'knowledge'] as const).map((tab) => (
                 <Tabs.Trigger
                   key={tab}
                   value={tab}
