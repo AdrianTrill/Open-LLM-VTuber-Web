@@ -81,20 +81,25 @@ function Persona(): JSX.Element {
           {t('persona.presets')}
         </Text>
         <Flex wrap="wrap" gap={2}>
-          {Object.keys(PRESETS).map((name) => (
-            <Button
-              key={name}
-              size="xs"
-              variant={activePreset === name ? 'solid' : 'subtle'}
-              colorPalette={activePreset === name ? 'blue' : 'gray'}
-              onClick={() => {
-                setPrompt(PRESETS[name]);
-                setActivePreset(name);
-              }}
-            >
-              {name}
-            </Button>
-          ))}
+          {Object.keys(PRESETS).map((name) => {
+            const isActive = activePreset === name;
+            return (
+              <Button
+                key={name}
+                size="xs"
+                variant="solid"
+                bg={isActive ? 'blue.500' : 'gray.600'}
+                color="white"
+                _hover={{ bg: isActive ? 'blue.400' : 'gray.500' }}
+                onClick={() => {
+                  setPrompt(PRESETS[name]);
+                  setActivePreset(name);
+                }}
+              >
+                {name}
+              </Button>
+            );
+          })}
         </Flex>
       </Box>
 
@@ -125,8 +130,10 @@ function Persona(): JSX.Element {
       <Flex gap={3} justify="flex-end">
         <Button
           size="sm"
-          variant="subtle"
-          colorPalette="gray"
+          variant="solid"
+          bg="gray.600"
+          color="white"
+          _hover={{ bg: 'gray.500' }}
           onClick={() => {
             setPrompt(originalPrompt);
             setActivePreset(null);
