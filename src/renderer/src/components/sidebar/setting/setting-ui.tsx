@@ -128,55 +128,20 @@ function SettingUI({ open, onClose }: SettingUIProps): JSX.Element {
             onValueChange={(details) => setActiveTab(details.value)}
             {...settingStyles.settingUI.tabs.root}
           >
-            <Tabs.List {...settingStyles.settingUI.tabs.list}>
-              <Tabs.Trigger
-                value="general"
-                {...settingStyles.settingUI.tabs.trigger}
-              >
-                {t('settings.tabs.general')}
-              </Tabs.Trigger>
-              <Tabs.Trigger
-                value="live2d"
-                {...settingStyles.settingUI.tabs.trigger}
-              >
-                {t('settings.tabs.live2d')}
-              </Tabs.Trigger>
-              <Tabs.Trigger
-                value="asr"
-                {...settingStyles.settingUI.tabs.trigger}
-              >
-                {t('settings.tabs.asr')}
-              </Tabs.Trigger>
-              <Tabs.Trigger
-                value="tts"
-                {...settingStyles.settingUI.tabs.trigger}
-              >
-                {t('settings.tabs.tts')}
-              </Tabs.Trigger>
-              <Tabs.Trigger
-                value="agent"
-                {...settingStyles.settingUI.tabs.trigger}
-              >
-                {t('settings.tabs.agent')}
-              </Tabs.Trigger>
-              <Tabs.Trigger
-                value="persona"
-                {...settingStyles.settingUI.tabs.trigger}
-              >
-                {t('settings.tabs.persona')}
-              </Tabs.Trigger>
-              <Tabs.Trigger
-                value="knowledge"
-                {...settingStyles.settingUI.tabs.trigger}
-              >
-                {t('settings.tabs.knowledge')}
-              </Tabs.Trigger>
-              <Tabs.Trigger
-                value="about"
-                {...settingStyles.settingUI.tabs.trigger}
-              >
-                {t('settings.tabs.about')}
-              </Tabs.Trigger>
+            <Tabs.List
+              {...settingStyles.settingUI.tabs.list}
+              style={{ display: 'flex', flexWrap: 'wrap', gap: '4px 8px' }}
+            >
+              {(['general', 'live2d', 'asr', 'tts', 'agent', 'persona', 'knowledge', 'about'] as const).map((tab) => (
+                <Tabs.Trigger
+                  key={tab}
+                  value={tab}
+                  {...settingStyles.settingUI.tabs.trigger}
+                  style={{ fontSize: '12px', padding: '4px 8px' }}
+                >
+                  {t(`settings.tabs.${tab}`)}
+                </Tabs.Trigger>
+              ))}
             </Tabs.List>
 
             {tabsContent}
