@@ -21,6 +21,8 @@ import Live2D from './live2d';
 import ASR from './asr';
 import TTS from './tts';
 import Agent from './agent';
+import Persona from './persona';
+import Knowledge from './knowledge';
 import About from './about';
 
 interface SettingUIProps {
@@ -86,6 +88,12 @@ function SettingUI({ open, onClose }: SettingUIProps): JSX.Element {
             onCancel={handleCancelCallback}
           />
         </Tabs.Content>
+        <Tabs.Content value="persona" {...settingStyles.settingUI.tabs.content}>
+          <Persona />
+        </Tabs.Content>
+        <Tabs.Content value="knowledge" {...settingStyles.settingUI.tabs.content}>
+          <Knowledge />
+        </Tabs.Content>
         <Tabs.Content value="about" {...settingStyles.settingUI.tabs.content}>
           <About />
         </Tabs.Content>
@@ -150,6 +158,18 @@ function SettingUI({ open, onClose }: SettingUIProps): JSX.Element {
                 {...settingStyles.settingUI.tabs.trigger}
               >
                 {t('settings.tabs.agent')}
+              </Tabs.Trigger>
+              <Tabs.Trigger
+                value="persona"
+                {...settingStyles.settingUI.tabs.trigger}
+              >
+                {t('settings.tabs.persona')}
+              </Tabs.Trigger>
+              <Tabs.Trigger
+                value="knowledge"
+                {...settingStyles.settingUI.tabs.trigger}
+              >
+                {t('settings.tabs.knowledge')}
               </Tabs.Trigger>
               <Tabs.Trigger
                 value="about"

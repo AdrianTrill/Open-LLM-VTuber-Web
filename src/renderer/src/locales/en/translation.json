@@ -13,6 +13,8 @@
       "asr": "ASR",
       "tts": "TTS",
       "agent": "Agent",
+      "persona": "Persona",
+      "knowledge": "Knowledge",
       "about": "About"
     },
     "general": {
@@ -65,6 +67,40 @@
       "copyright": "Copyright",
       "viewLicense": "View License"
     }
+  },
+  "persona": {
+    "presets": "Quick Presets",
+    "promptLabel": "Persona Prompt",
+    "promptPlaceholder": "Enter the AI persona prompt...",
+    "reset": "Reset",
+    "save": "Save & Apply",
+    "saved": "Prompt saved! Changes take effect on the next conversation.",
+    "loadError": "Could not load current prompt.",
+    "emptyError": "Prompt cannot be empty.",
+    "saveError": "Failed to save prompt."
+  },
+  "knowledge": {
+    "dropHere": "Drop files here to upload",
+    "dropFormats": ".txt, .md, .json, or .csv files",
+    "pasteText": "Or paste text instead",
+    "hideTextInput": "Hide text input",
+    "docNamePlaceholder": "Document name (e.g. products.txt)",
+    "pasteContentPlaceholder": "Paste product info, FAQs, or any knowledge here...",
+    "addDocument": "Add Document",
+    "documents": "Documents",
+    "noDocs": "No documents yet. Upload files or paste text above.",
+    "reindexHint": "Re-index after changes",
+    "reindex": "Re-index All",
+    "uploaded": "Uploaded {{count}} file(s). Click Re-index to update knowledge.",
+    "pasteSuccess": "Added: {{name}}. Click Re-index to update knowledge.",
+    "pasteError": "Please provide both a name and content.",
+    "deleted": "Deleted: {{name}}",
+    "deleteError": "Failed to delete document.",
+    "uploadError": "Upload failed.",
+    "loadError": "Failed to load documents.",
+    "indexing": "Indexing documents...",
+    "indexed": "Indexed {{count}} documents. CeCe will use this knowledge now.",
+    "indexError": "Indexing failed."
   },
   "footer": {
     "typeYourMessage": "Type your message...",
