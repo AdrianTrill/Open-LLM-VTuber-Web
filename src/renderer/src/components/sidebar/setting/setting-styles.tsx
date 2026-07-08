@@ -42,9 +42,11 @@ export const settingStyles = {
       content: {},
       trigger: {
         color: 'whiteAlpha.600',
-        fontSize: 'xs',
-        px: 2,
-        py: 1,
+        css: {
+          fontSize: '11px',
+          padding: '4px 6px',
+          minWidth: 'unset',
+        },
         _selected: {
           color: 'white',
         },
@@ -54,14 +56,16 @@ export const settingStyles = {
       },
       list: {
         display: 'flex',
-        flexWrap: 'wrap',
-        gap: 1,
+        flexWrap: 'wrap' as const,
         justifyContent: 'flex-start',
         width: '100%',
         borderBottom: '1px solid',
         borderColor: 'whiteAlpha.200',
         mb: 4,
         pl: 0,
+        css: {
+          gap: '2px 4px',
+        },
       },
     },
     footer: {
