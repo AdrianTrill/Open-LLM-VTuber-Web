@@ -85,8 +85,8 @@ function Persona(): JSX.Element {
             <Button
               key={name}
               size="xs"
-              variant={activePreset === name ? 'solid' : 'outline'}
-              colorPalette={activePreset === name ? 'purple' : 'gray'}
+              variant={activePreset === name ? 'solid' : 'subtle'}
+              colorPalette={activePreset === name ? 'blue' : 'gray'}
               onClick={() => {
                 setPrompt(PRESETS[name]);
                 setActivePreset(name);
@@ -125,7 +125,7 @@ function Persona(): JSX.Element {
       <Flex gap={3} justify="flex-end">
         <Button
           size="sm"
-          variant="outline"
+          variant="subtle"
           colorPalette="gray"
           onClick={() => {
             setPrompt(originalPrompt);
