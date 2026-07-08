@@ -109,6 +109,17 @@ function SettingUI({ open, onClose }: SettingUIProps): JSX.Element {
       placement="start"
     >
       <DrawerBackdrop />
+      <style>{`
+        [data-scope="tabs"][data-part="list"] {
+          display: flex !important;
+          flex-wrap: wrap !important;
+          gap: 4px 10px !important;
+        }
+        [data-scope="tabs"][data-part="trigger"] {
+          font-size: 12px !important;
+          padding: 4px 8px !important;
+        }
+      `}</style>
       <DrawerContent {...settingStyles.settingUI.drawerContent}>
         <DrawerHeader {...settingStyles.settingUI.drawerHeader}>
           <DrawerTitle {...settingStyles.settingUI.drawerTitle}>
@@ -128,16 +139,12 @@ function SettingUI({ open, onClose }: SettingUIProps): JSX.Element {
             onValueChange={(details) => setActiveTab(details.value)}
             {...settingStyles.settingUI.tabs.root}
           >
-            <Tabs.List
-              {...settingStyles.settingUI.tabs.list}
-              style={{ display: 'flex', flexWrap: 'wrap', gap: '4px 8px' }}
-            >
+            <Tabs.List {...settingStyles.settingUI.tabs.list}>
               {(['general', 'live2d', 'asr', 'tts', 'agent', 'persona', 'knowledge', 'about'] as const).map((tab) => (
                 <Tabs.Trigger
                   key={tab}
                   value={tab}
                   {...settingStyles.settingUI.tabs.trigger}
-                  style={{ fontSize: '12px', padding: '4px 8px' }}
                 >
                   {t(`settings.tabs.${tab}`)}
                 </Tabs.Trigger>
