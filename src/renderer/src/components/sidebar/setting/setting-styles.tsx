@@ -42,6 +42,9 @@ export const settingStyles = {
       content: {},
       trigger: {
         color: 'whiteAlpha.600',
+        fontSize: 'xs',
+        px: 2,
+        py: 1,
         _selected: {
           color: 'white',
         },
@@ -51,6 +54,8 @@ export const settingStyles = {
       },
       list: {
         display: 'flex',
+        flexWrap: 'wrap',
+        gap: 1,
         justifyContent: 'flex-start',
         width: '100%',
         borderBottom: '1px solid',
