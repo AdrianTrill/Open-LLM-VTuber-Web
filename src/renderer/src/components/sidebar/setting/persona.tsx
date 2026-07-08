@@ -4,7 +4,6 @@ import {
 } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import { settingStyles } from './setting-styles';
-import { useWebSocket } from '@/context/websocket-context';
 
 const PRESETS: Record<string, string> = {
   'Sally Beauty (EN)':
@@ -23,14 +22,13 @@ const PRESETS: Record<string, string> = {
 
 function Persona(): JSX.Element {
   const { t } = useTranslation();
-  const { baseUrl } = useWebSocket();
   const [prompt, setPrompt] = useState('');
   const [originalPrompt, setOriginalPrompt] = useState('');
   const [activePreset, setActivePreset] = useState<string | null>(null);
   const [status, setStatus] = useState<{ msg: string; ok: boolean } | null>(null);
   const [saving, setSaving] = useState(false);
 
-  const apiBase = baseUrl || '';
+  const apiBase = '';
 
   useEffect(() => {
     fetch(`${apiBase}/api/persona`)

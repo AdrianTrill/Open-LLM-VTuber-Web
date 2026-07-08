@@ -4,8 +4,6 @@ import {
 } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import { HiOutlineTrash, HiOutlineUpload, HiOutlineRefresh } from 'react-icons/hi';
-import { useWebSocket } from '@/context/websocket-context';
-
 interface DocInfo {
   name: string;
   size: number;
@@ -20,8 +18,7 @@ function formatSize(bytes: number): string {
 
 function Knowledge(): JSX.Element {
   const { t } = useTranslation();
-  const { baseUrl } = useWebSocket();
-  const apiBase = baseUrl || '';
+  const apiBase = '';
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [docs, setDocs] = useState<DocInfo[]>([]);
