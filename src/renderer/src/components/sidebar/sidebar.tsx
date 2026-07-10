@@ -7,6 +7,7 @@ import { memo, useState, useEffect } from 'react';
 import { sidebarStyles } from './sidebar-styles';
 import SettingUI from './setting/setting-ui';
 import ChatHistoryPanel from './chat-history-panel';
+import BottomTab from './bottom-tab';
 import HistoryDrawer from './history-drawer';
 import { useSidebar } from '@/hooks/sidebar/use-sidebar';
 import GroupDrawer from './group-drawer';
@@ -130,23 +131,23 @@ CeceHeader.displayName = 'CeceHeader';
 
 const HeaderButtons = memo(({ onSettingsOpen, onNewHistory, setMode, currentMode, isElectron }: HeaderButtonsProps) => (
   <Box display="flex" gap={1} px={2} py={1}>
-    <Button onClick={onSettingsOpen} size="sm" variant="ghost" color="rgba(255,255,255,0.6)" _hover={{ color: '#f0f0f5', bg: 'rgba(255,255,255,0.06)' }}>
+    <Button onClick={onSettingsOpen} size="sm" variant="ghost" color="rgba(255,255,255,0.6)" _hover={{ color: '#f0f0f5', bg: 'rgba(255,255,255,0.06)' }} title="Settings">
       <FiSettings />
     </Button>
 
     <GroupDrawer>
-      <Button size="sm" variant="ghost" color="rgba(255,255,255,0.6)" _hover={{ color: '#f0f0f5', bg: 'rgba(255,255,255,0.06)' }}>
+      <Button size="sm" variant="ghost" color="rgba(255,255,255,0.6)" _hover={{ color: '#f0f0f5', bg: 'rgba(255,255,255,0.06)' }} title="Contacts">
         <FiUsers />
       </Button>
     </GroupDrawer>
 
     <HistoryDrawer>
-      <Button size="sm" variant="ghost" color="rgba(255,255,255,0.6)" _hover={{ color: '#f0f0f5', bg: 'rgba(255,255,255,0.06)' }}>
+      <Button size="sm" variant="ghost" color="rgba(255,255,255,0.6)" _hover={{ color: '#f0f0f5', bg: 'rgba(255,255,255,0.06)' }} title="History">
         <FiClock />
       </Button>
     </HistoryDrawer>
 
-    <Button onClick={onNewHistory} size="sm" variant="ghost" color="rgba(255,255,255,0.6)" _hover={{ color: '#f0f0f5', bg: 'rgba(255,255,255,0.06)' }}>
+    <Button onClick={onNewHistory} size="sm" variant="ghost" color="rgba(255,255,255,0.6)" _hover={{ color: '#f0f0f5', bg: 'rgba(255,255,255,0.06)' }} title="New conversation">
       <FiPlus />
     </Button>
 
@@ -176,6 +177,7 @@ const SidebarContent = memo(({
       />
     </Box>
     <ChatHistoryPanel />
+    <BottomTab />
   </Box>
 ));
 

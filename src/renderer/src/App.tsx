@@ -29,6 +29,7 @@ import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
 import Background from "./components/canvas/background";
 import WebSocketStatus from "./components/canvas/ws-status";
 import Subtitle from "./components/canvas/subtitle";
+import AIStateIndicator from "./components/footer/ai-state-indicator";
 import { ModeProvider, useMode } from "./context/mode-context";
 
 function AppContent(): JSX.Element {
@@ -122,8 +123,17 @@ function AppContent(): JSX.Element {
             </Box>
             <Box {...layoutStyles.mainContent}>
               <Background />
-              <Box position="absolute" top="20px" left="20px" zIndex={10}>
+              <Box
+                position="absolute"
+                top="16px"
+                left="16px"
+                zIndex={10}
+                display="flex"
+                alignItems="center"
+                gap={2}
+              >
                 <WebSocketStatus />
+                <AIStateIndicator />
               </Box>
               <Box
                 position="absolute"
