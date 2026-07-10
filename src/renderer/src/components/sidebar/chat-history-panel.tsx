@@ -14,7 +14,7 @@ import { useChatHistory } from '@/context/chat-history-context';
 import { Global } from '@emotion/react';
 import { useConfig } from '@/context/character-config-context';
 import { useWebSocket } from '@/context/websocket-context';
-import { TbTool, TbCheck, TbX } from 'react-icons/tb';
+import { TbTool, TbCheck, TbX, TbSparkles } from 'react-icons/tb';
 import { useTranslation } from 'react-i18next';
 
 // Main component
@@ -62,7 +62,7 @@ function ChatHistoryPanel(): JSX.Element {
                   mb={4}
                   boxShadow="0 4px 16px rgba(118, 185, 0, 0.25)"
                 >
-                  <Text fontSize="22px" fontWeight="800" color="white">C</Text>
+                  <TbSparkles size="26" color="white" />
                 </Box>
                 <Text fontSize="16px" fontWeight="600" color="#f0f0f5" mb={1}>
                   Welcome to CeCe

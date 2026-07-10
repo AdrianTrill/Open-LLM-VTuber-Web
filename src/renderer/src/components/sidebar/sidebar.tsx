@@ -1,7 +1,7 @@
 /* eslint-disable react/require-default-props */
 import { Box, Button, Text, Badge, Menu } from '@chakra-ui/react';
 import {
-  TbSettings, TbClock, TbPlus, TbChevronLeft, TbUsers, TbStack2
+  TbSettings, TbClock, TbPlus, TbChevronLeft, TbUsers, TbStack2, TbSparkles
 } from 'react-icons/tb';
 import { memo, useState, useEffect } from 'react';
 import { sidebarStyles } from './sidebar-styles';
@@ -99,7 +99,7 @@ const CeceHeader = memo(({ ceceMode }: { ceceMode: string }) => (
       flexShrink={0}
       boxShadow="0 2px 8px rgba(118, 185, 0, 0.25)"
     >
-      <Text fontSize="16px" fontWeight="800" color="white" lineHeight="1">C</Text>
+      <TbSparkles size="20" color="white" />
     </Box>
     <Box flex={1}>
       <Text fontSize="15px" fontWeight="600" color="#f0f0f5" letterSpacing="-0.01em">
