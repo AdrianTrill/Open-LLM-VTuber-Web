@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { Tabs } from '@chakra-ui/react'
-import { FiCamera, FiMonitor, FiGlobe } from 'react-icons/fi'
+import { TbCamera, TbDeviceDesktop, TbWorld } from 'react-icons/tb'
 import { useTranslation } from 'react-i18next'
 import { sidebarStyles } from './sidebar-styles'
 import CameraPanel from './camera-panel'
@@ -18,15 +18,15 @@ function BottomTab(): JSX.Element {
     >
       <Tabs.List {...sidebarStyles.bottomTab.list}>
         <Tabs.Trigger value="camera" {...sidebarStyles.bottomTab.trigger}>
-          <FiCamera />
+          <TbCamera />
           {t('sidebar.camera')}
         </Tabs.Trigger>
         <Tabs.Trigger value="screen" {...sidebarStyles.bottomTab.trigger}>
-          <FiMonitor />
+          <TbDeviceDesktop />
           {t('sidebar.screen')}
         </Tabs.Trigger>
         <Tabs.Trigger value="browser" {...sidebarStyles.bottomTab.trigger}>
-          <FiGlobe />
+          <TbWorld />
           {t('sidebar.browser')}
         </Tabs.Trigger>
       </Tabs.List>

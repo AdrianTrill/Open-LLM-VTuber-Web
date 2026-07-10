@@ -1,5 +1,5 @@
 import { Box, Button } from '@chakra-ui/react';
-import { FiTrash2 } from 'react-icons/fi';
+import { TbTrash } from 'react-icons/tb';
 import { formatDistanceToNow } from 'date-fns';
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -58,7 +58,7 @@ const HistoryItem = memo(({
           disabled={isDeleteDisabled}
           {...sidebarStyles.historyDrawer.deleteButton}
         >
-          <FiTrash2 />
+          <TbTrash />
         </Button>
       </Box>
       {latestMessage.content && (

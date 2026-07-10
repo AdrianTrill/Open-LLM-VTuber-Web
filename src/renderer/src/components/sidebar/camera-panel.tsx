@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Box, Text } from '@chakra-ui/react';
-import { FiCamera } from 'react-icons/fi';
+import { TbCamera } from 'react-icons/tb';
 import { useTranslation } from 'react-i18next';
 import { Tooltip } from '@/components/ui/tooltip';
 import { sidebarStyles } from './sidebar-styles';
@@ -29,7 +29,7 @@ function CameraPlaceholder() {
       alignItems="center"
       gap={2}
     >
-      <FiCamera size={24} />
+      <TbCamera size={24} />
       <Text color="whiteAlpha.600" fontSize="sm" textAlign="center">
         {t('footer.cameraControl')}
       </Text>

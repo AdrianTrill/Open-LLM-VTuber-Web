@@ -7,7 +7,7 @@ import {
   Icon,
 } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
-import { FaGithub, FaBook } from 'react-icons/fa';
+import { TbBrandGithub, TbBook } from 'react-icons/tb';
 import { settingStyles } from './setting-styles';
 import { Button } from '@/components/ui/button';
 
@@ -51,13 +51,13 @@ function About(): JSX.Element {
               )
             }
           >
-            <Icon as={FaGithub} mr={2} /> {t("settings.about.github")}
+            <Icon as={TbBrandGithub} mr={2} /> {t("settings.about.github")}
           </Button>
           <Button
             size="sm"
             onClick={() => openExternalLink("https://docs.llmvtuber.com")}
           >
-            <Icon as={FaBook} mr={2} /> {t("settings.about.documentation")}
+            <Icon as={TbBook} mr={2} /> {t("settings.about.documentation")}
           </Button>
         </HStack>
       </Box>

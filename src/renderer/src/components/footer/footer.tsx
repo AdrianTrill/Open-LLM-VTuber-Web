@@ -2,9 +2,7 @@
 import {
   Box, Textarea, IconButton, HStack,
 } from '@chakra-ui/react';
-import { BsMicFill, BsMicMuteFill, BsPaperclip } from 'react-icons/bs';
-import { IoHandRightSharp } from 'react-icons/io5';
-import { FiChevronDown } from 'react-icons/fi';
+import { TbMicrophone, TbMicrophoneOff, TbPaperclip, TbHandStop, TbChevronDown } from 'react-icons/tb';
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { InputGroup } from '@/components/ui/input-group';
@@ -44,7 +42,7 @@ const ToggleButton = memo(({ isCollapsed, onToggle }: ToggleButtonProps) => (
       transform: isCollapsed ? 'rotate(180deg)' : 'rotate(0deg)',
     }}
   >
-    <FiChevronDown />
+    <TbChevronDown />
   </Box>
 ));
 
@@ -66,7 +64,7 @@ const ActionButtons = memo(({ micOn, onMicToggle, onInterrupt }: ActionButtonsPr
         aria-label={micOn ? 'Mute microphone' : 'Unmute microphone'}
         title={micOn ? 'Microphone on — click to mute' : 'Microphone off — click to unmute'}
       >
-        {micOn ? <BsMicFill size="20" /> : <BsMicMuteFill size="20" />}
+        {micOn ? <TbMicrophone size="22" /> : <TbMicrophoneOff size="22" />}
       </IconButton>
       <Box fontSize="10px" color="rgba(255,255,255,0.45)" lineHeight="1" userSelect="none">
         Mic
@@ -87,7 +85,7 @@ const ActionButtons = memo(({ micOn, onMicToggle, onInterrupt }: ActionButtonsPr
         onClick={onInterrupt}
         title="Push to talk / interrupt"
       >
-        <IoHandRightSharp size="18" />
+        <TbHandStop size="20" />
       </IconButton>
       <Box fontSize="10px" color="rgba(255,255,255,0.45)" lineHeight="1" userSelect="none">
         Talk
@@ -115,7 +113,7 @@ const MessageInput = memo(({
           variant="ghost"
           {...footerStyles.footer.attachButton}
         >
-          <BsPaperclip size="20" />
+          <TbPaperclip size="20" />
         </IconButton>
         <Textarea
           value={value}

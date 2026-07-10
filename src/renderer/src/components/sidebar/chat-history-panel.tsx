@@ -14,7 +14,7 @@ import { useChatHistory } from '@/context/chat-history-context';
 import { Global } from '@emotion/react';
 import { useConfig } from '@/context/character-config-context';
 import { useWebSocket } from '@/context/websocket-context';
-import { FaTools, FaCheck, FaTimes } from 'react-icons/fa';
+import { TbTool, TbCheck, TbX } from 'react-icons/tb';
 import { useTranslation } from 'react-i18next';
 
 // Main component
@@ -108,7 +108,7 @@ function ChatHistoryPanel(): JSX.Element {
                       alignItems="center"
                     >
                       <Icon
-                        as={FaTools}
+                        as={TbTool}
                         {...sidebarStyles.toolCallIndicator.icon}
                       />
                       <Text {...sidebarStyles.toolCallIndicator.text}>
@@ -125,14 +125,14 @@ function ChatHistoryPanel(): JSX.Element {
                       )}
                       {msg.status === "completed" && (
                         <Icon
-                          as={FaCheck}
+                          as={TbCheck}
                           {...sidebarStyles.toolCallIndicator.completedIcon}
                         />
                       )}
                       {/* Optional: Add an error icon */}
                       {msg.status === "error" && (
                         <Icon
-                          as={FaTimes}
+                          as={TbX}
                           {...sidebarStyles.toolCallIndicator.errorIcon}
                         />
                       )}

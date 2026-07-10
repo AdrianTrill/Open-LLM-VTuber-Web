@@ -1,8 +1,8 @@
 /* eslint-disable react/require-default-props */
 import { Box, Button, Text, Badge, Menu } from '@chakra-ui/react';
 import {
-  FiSettings, FiClock, FiPlus, FiChevronLeft, FiUsers, FiLayers
-} from 'react-icons/fi';
+  TbSettings, TbClock, TbPlus, TbChevronLeft, TbUsers, TbStack2
+} from 'react-icons/tb';
 import { memo, useState, useEffect } from 'react';
 import { sidebarStyles } from './sidebar-styles';
 import SettingUI from './setting/setting-ui';
@@ -37,7 +37,7 @@ const ToggleButton = memo(({ isCollapsed, onToggle }: {
     }}
     onClick={onToggle}
   >
-    <FiChevronLeft />
+    <TbChevronLeft />
   </Box>
 ));
 
@@ -50,7 +50,7 @@ const ModeMenu = memo(({ setMode, currentMode, isElectron }: {
 }) => (
   <Menu.Root>
     <Menu.Trigger as={Button} aria-label="Mode Menu" title="Change Mode">
-      <FiLayers />
+      <TbStack2 />
     </Menu.Trigger>
     <Menu.Positioner>
       <Menu.Content>
@@ -132,23 +132,23 @@ CeceHeader.displayName = 'CeceHeader';
 const HeaderButtons = memo(({ onSettingsOpen, onNewHistory, setMode, currentMode, isElectron }: HeaderButtonsProps) => (
   <Box display="flex" gap={1} px={2} py={1}>
     <Button onClick={onSettingsOpen} size="sm" variant="ghost" color="rgba(255,255,255,0.6)" _hover={{ color: '#f0f0f5', bg: 'rgba(255,255,255,0.06)' }} title="Settings">
-      <FiSettings />
+      <TbSettings />
     </Button>
 
     <GroupDrawer>
       <Button size="sm" variant="ghost" color="rgba(255,255,255,0.6)" _hover={{ color: '#f0f0f5', bg: 'rgba(255,255,255,0.06)' }} title="Contacts">
-        <FiUsers />
+        <TbUsers />
       </Button>
     </GroupDrawer>
 
     <HistoryDrawer>
       <Button size="sm" variant="ghost" color="rgba(255,255,255,0.6)" _hover={{ color: '#f0f0f5', bg: 'rgba(255,255,255,0.06)' }} title="History">
-        <FiClock />
+        <TbClock />
       </Button>
     </HistoryDrawer>
 
     <Button onClick={onNewHistory} size="sm" variant="ghost" color="rgba(255,255,255,0.6)" _hover={{ color: '#f0f0f5', bg: 'rgba(255,255,255,0.06)' }} title="New conversation">
-      <FiPlus />
+      <TbPlus />
     </Button>
 
     <ModeMenu setMode={setMode} currentMode={currentMode} isElectron={isElectron} />

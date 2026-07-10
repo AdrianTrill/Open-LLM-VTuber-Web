@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Box, IconButton } from '@chakra-ui/react';
 import {
-  FiMinus, FiMaximize2, FiMinimize2, FiX, FiChevronsDown,
-} from 'react-icons/fi';
+  TbMinus, TbArrowsMaximize, TbArrowsMinimize, TbX, TbChevronsDown,
+} from 'react-icons/tb';
 import { layoutStyles } from '@/layout';
 
 function TitleBar(): JSX.Element {
@@ -43,9 +43,9 @@ function TitleBar(): JSX.Element {
   };
 
   const getButtonIcon = () => {
-    if (isFullScreen) return <FiChevronsDown />;
-    if (isMaximized) return <FiMinimize2 />;
-    return <FiMaximize2 />;
+    if (isFullScreen) return <TbChevronsDown />;
+    if (isMaximized) return <TbArrowsMinimize />;
+    return <TbArrowsMaximize />;
   };
 
   if (isMac) {
@@ -69,7 +69,7 @@ function TitleBar(): JSX.Element {
           onClick={() => window.electron?.ipcRenderer.send('window-minimize')}
           aria-label="Minimize"
         >
-          <FiMinus />
+          <TbMinus />
         </IconButton>
         <IconButton
           {...layoutStyles.titleBarButton}
@@ -83,7 +83,7 @@ function TitleBar(): JSX.Element {
           onClick={() => window.electron?.ipcRenderer.send('window-close')}
           aria-label="Close"
         >
-          <FiX />
+          <TbX />
         </IconButton>
       </Box>
     </Box>
