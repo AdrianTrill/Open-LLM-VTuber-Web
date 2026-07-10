@@ -14,7 +14,7 @@ import { useChatHistory } from '@/context/chat-history-context';
 import { Global } from '@emotion/react';
 import { useConfig } from '@/context/character-config-context';
 import { useWebSocket } from '@/context/websocket-context';
-import { TbTool, TbCheck, TbX, TbSparkles } from 'react-icons/tb';
+import { TbTool, TbCheck, TbX } from 'react-icons/tb';
 import { useTranslation } from 'react-i18next';
 
 // Main component
@@ -45,56 +45,34 @@ function ChatHistoryPanel(): JSX.Element {
               <Box
                 display="flex"
                 flexDirection="column"
-                alignItems="center"
-                justifyContent="center"
+                px={4}
+                pt={4}
                 height="100%"
-                px={6}
-                textAlign="center"
               >
-                <Box
-                  w="52px"
-                  h="52px"
-                  borderRadius="14px"
-                  bg="#76B900"
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  mb={4}
-                  boxShadow="0 4px 16px rgba(118, 185, 0, 0.25)"
-                >
-                  <TbSparkles size="26" color="white" />
-                </Box>
-                <Text fontSize="16px" fontWeight="600" color="#f0f0f5" mb={1}>
-                  Welcome to CeCe
+                <Text fontSize="12px" color="rgba(255,255,255,0.35)" fontWeight="500" mb={2} textTransform="uppercase" letterSpacing="0.04em">
+                  Try asking
                 </Text>
-                <Text fontSize="13px" color="rgba(255,255,255,0.4)" lineHeight="1.5" maxW="280px">
-                  Your AI beauty consultant. Ask about products, shades, techniques — or just say hi.
+                {['Hair color tips', 'Skincare routine', 'Product recommendations'].map((q) => (
+                  <Box
+                    key={q}
+                    px={3}
+                    py={2.5}
+                    mb={1.5}
+                    borderRadius="10px"
+                    border="1px solid rgba(255,255,255,0.06)"
+                    bg="rgba(255,255,255,0.02)"
+                    fontSize="13px"
+                    color="rgba(255,255,255,0.6)"
+                    cursor="default"
+                    _hover={{ borderColor: 'rgba(255,255,255,0.12)', bg: 'rgba(255,255,255,0.04)' }}
+                    transition="all 0.15s ease"
+                  >
+                    {q}
+                  </Box>
+                ))}
+                <Text fontSize="12px" color="rgba(255,255,255,0.2)" mt={3} textAlign="center">
+                  Transcript appears here
                 </Text>
-                <Box
-                  mt={5}
-                  display="flex"
-                  flexWrap="wrap"
-                  gap={2}
-                  justifyContent="center"
-                >
-                  {['Hair color tips', 'Skincare routine', 'Product recommendations'].map((q) => (
-                    <Box
-                      key={q}
-                      px={3}
-                      py={1.5}
-                      borderRadius="8px"
-                      border="1px solid rgba(255,255,255,0.08)"
-                      bg="rgba(255,255,255,0.03)"
-                      fontSize="12px"
-                      color="rgba(255,255,255,0.5)"
-                      cursor="default"
-                      _hover={{ borderColor: 'rgba(118,185,0,0.25)', color: 'rgba(255,255,255,0.7)' }}
-                      transition="all 0.15s ease"
-                    >
-                      {q}
-                    </Box>
-                  ))}
-                </Box>
               </Box>
             ) : (
               validMessages.map((msg) => {

@@ -2,10 +2,9 @@
 import {
   Box, Textarea, IconButton, HStack,
 } from '@chakra-ui/react';
-import { TbMicrophone, TbMicrophoneOff, TbPaperclip, TbHandStop, TbChevronDown } from 'react-icons/tb';
+import { TbMicrophone, TbMicrophoneOff, TbPaperclip, TbHandStop, TbChevronDown, TbSend } from 'react-icons/tb';
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { InputGroup } from '@/components/ui/input-group';
 import { footerStyles } from './footer-styles';
 import { useFooter } from '@/hooks/footer/use-footer';
 
@@ -17,20 +16,6 @@ interface FooterProps {
 interface ToggleButtonProps {
   isCollapsed: boolean
   onToggle?: () => void
-}
-
-interface ActionButtonsProps {
-  micOn: boolean
-  onMicToggle: () => void
-  onInterrupt: () => void
-}
-
-interface MessageInputProps {
-  value: string
-  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
-  onKeyDown: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void
-  onCompositionStart: () => void
-  onCompositionEnd: () => void
 }
 
 const ToggleButton = memo(({ isCollapsed, onToggle }: ToggleButtonProps) => (
@@ -48,90 +33,8 @@ const ToggleButton = memo(({ isCollapsed, onToggle }: ToggleButtonProps) => (
 
 ToggleButton.displayName = 'ToggleButton';
 
-const ActionButtons = memo(({ micOn, onMicToggle, onInterrupt }: ActionButtonsProps) => (
-  <HStack gap={3}>
-    <Box display="flex" flexDirection="column" alignItems="center" gap={1}>
-      <IconButton
-        bg={micOn ? '#76B900' : '#dc2626'}
-        color="white"
-        borderRadius="full"
-        width="52px"
-        height="52px"
-        minW="52px"
-        _hover={{ opacity: 0.9 }}
-        transition="all 0.15s ease"
-        onClick={onMicToggle}
-        aria-label={micOn ? 'Mute microphone' : 'Unmute microphone'}
-        title={micOn ? 'Microphone on — click to mute' : 'Microphone off — click to unmute'}
-      >
-        {micOn ? <TbMicrophone size="22" /> : <TbMicrophoneOff size="22" />}
-      </IconButton>
-      <Box fontSize="10px" color="rgba(255,255,255,0.45)" lineHeight="1" userSelect="none">
-        Mic
-      </Box>
-    </Box>
-    <Box display="flex" flexDirection="column" alignItems="center" gap={1}>
-      <IconButton
-        aria-label="Push to talk / interrupt"
-        bg="rgba(255,255,255,0.08)"
-        color="rgba(255,255,255,0.7)"
-        borderRadius="full"
-        width="44px"
-        height="44px"
-        minW="44px"
-        border="1px solid rgba(255,255,255,0.08)"
-        _hover={{ bg: 'rgba(255,255,255,0.12)', color: '#f0f0f5' }}
-        transition="all 0.15s ease"
-        onClick={onInterrupt}
-        title="Push to talk / interrupt"
-      >
-        <TbHandStop size="20" />
-      </IconButton>
-      <Box fontSize="10px" color="rgba(255,255,255,0.45)" lineHeight="1" userSelect="none">
-        Talk
-      </Box>
-    </Box>
-  </HStack>
-));
-
-ActionButtons.displayName = 'ActionButtons';
-
-const MessageInput = memo(({
-  value,
-  onChange,
-  onKeyDown,
-  onCompositionStart,
-  onCompositionEnd,
-}: MessageInputProps) => {
-  const { t } = useTranslation();
-
-  return (
-    <InputGroup flex={1}>
-      <Box position="relative" width="100%">
-        <IconButton
-          aria-label="Attach file"
-          variant="ghost"
-          {...footerStyles.footer.attachButton}
-        >
-          <TbPaperclip size="20" />
-        </IconButton>
-        <Textarea
-          value={value}
-          onChange={onChange}
-          onKeyDown={onKeyDown}
-          onCompositionStart={onCompositionStart}
-          onCompositionEnd={onCompositionEnd}
-          placeholder={t('footer.typeYourMessage')}
-          {...footerStyles.footer.input}
-        />
-      </Box>
-    </InputGroup>
-  );
-});
-
-MessageInput.displayName = 'MessageInput';
-
 function Footer({ isCollapsed = false, onToggle }: FooterProps): JSX.Element {
+  const { t } = useTranslation();
   const {
     inputValue,
     handleInputChange,
@@ -147,21 +50,99 @@ function Footer({ isCollapsed = false, onToggle }: FooterProps): JSX.Element {
     <Box {...footerStyles.footer.container(isCollapsed)}>
       <ToggleButton isCollapsed={isCollapsed} onToggle={onToggle} />
 
-      <Box pt="0" px="4">
-        <HStack width="100%" gap={4} alignItems="center">
-          <ActionButtons
-            micOn={micOn}
-            onMicToggle={handleMicToggle}
-            onInterrupt={handleInterrupt}
-          />
+      <Box px="3" pb="3">
+        <HStack width="100%" gap={2} alignItems="center">
+          <IconButton
+            bg={micOn ? '#76B900' : '#dc2626'}
+            color="white"
+            borderRadius="full"
+            width="40px"
+            height="40px"
+            minW="40px"
+            _hover={{ opacity: 0.85 }}
+            transition="all 0.15s ease"
+            onClick={handleMicToggle}
+            aria-label={micOn ? 'Mute microphone' : 'Unmute microphone'}
+            title={micOn ? 'Microphone on — click to mute' : 'Microphone off — click to unmute'}
+          >
+            {micOn ? <TbMicrophone size="18" /> : <TbMicrophoneOff size="18" />}
+          </IconButton>
 
-          <MessageInput
-            value={inputValue}
-            onChange={handleInputChange}
-            onKeyDown={handleKeyPress}
-            onCompositionStart={handleCompositionStart}
-            onCompositionEnd={handleCompositionEnd}
-          />
+          <IconButton
+            aria-label="Push to talk / interrupt"
+            bg="rgba(255,255,255,0.06)"
+            color="rgba(255,255,255,0.6)"
+            borderRadius="full"
+            width="40px"
+            height="40px"
+            minW="40px"
+            border="1px solid rgba(255,255,255,0.06)"
+            _hover={{ bg: 'rgba(255,255,255,0.1)', color: '#f0f0f5' }}
+            transition="all 0.15s ease"
+            onClick={handleInterrupt}
+            title="Push to talk / interrupt"
+          >
+            <TbHandStop size="18" />
+          </IconButton>
+
+          <Box position="relative" flex={1}>
+            <IconButton
+              aria-label="Attach file"
+              variant="ghost"
+              position="absolute"
+              left="1"
+              top="50%"
+              transform="translateY(-50%)"
+              color="rgba(255,255,255,0.4)"
+              zIndex={2}
+              size="sm"
+              _hover={{ bg: 'transparent', color: '#f0f0f5' }}
+            >
+              <TbPaperclip size="18" />
+            </IconButton>
+            <Textarea
+              value={inputValue}
+              onChange={handleInputChange}
+              onKeyDown={handleKeyPress}
+              onCompositionStart={handleCompositionStart}
+              onCompositionEnd={handleCompositionEnd}
+              placeholder={t('footer.typeYourMessage')}
+              bg="#1c2030"
+              border="1px solid"
+              borderColor="rgba(255,255,255,0.06)"
+              borderRadius="10px"
+              fontSize="14px"
+              pl="10"
+              pr="10"
+              color="#f0f0f5"
+              _placeholder={{ color: 'rgba(255,255,255,0.3)' }}
+              _focus={{
+                borderColor: 'rgba(118, 185, 0, 0.3)',
+                bg: '#1c2030',
+                boxShadow: 'none',
+              }}
+              resize="none"
+              minHeight="42px"
+              maxHeight="42px"
+              height="42px"
+              py="10px"
+              lineHeight="1.4"
+            />
+            <IconButton
+              aria-label="Send message"
+              variant="ghost"
+              position="absolute"
+              right="1"
+              top="50%"
+              transform="translateY(-50%)"
+              color="rgba(118, 185, 0, 0.6)"
+              zIndex={2}
+              size="sm"
+              _hover={{ bg: 'transparent', color: '#76B900' }}
+            >
+              <TbSend size="18" />
+            </IconButton>
+          </Box>
         </HStack>
       </Box>
     </Box>

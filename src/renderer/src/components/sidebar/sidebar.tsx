@@ -1,5 +1,5 @@
 /* eslint-disable react/require-default-props */
-import { Box, Button, Text, Badge, Menu } from '@chakra-ui/react';
+import { Box, Button, Text, Menu } from '@chakra-ui/react';
 import {
   TbSettings, TbClock, TbPlus, TbChevronLeft, TbUsers, TbStack2, TbSparkles
 } from 'react-icons/tb';
@@ -43,40 +43,6 @@ const ToggleButton = memo(({ isCollapsed, onToggle }: {
 
 ToggleButton.displayName = 'ToggleButton';
 
-const ModeMenu = memo(({ setMode, currentMode, isElectron }: {
-  setMode: (mode: ModeType) => void
-  currentMode: ModeType
-  isElectron: boolean
-}) => (
-  <Menu.Root>
-    <Menu.Trigger as={Button} aria-label="Mode Menu" title="Change Mode">
-      <TbStack2 />
-    </Menu.Trigger>
-    <Menu.Positioner>
-      <Menu.Content>
-        <Menu.RadioItemGroup value={currentMode}>
-          <Menu.RadioItem value="window" onClick={() => setMode('window')}>
-            <Menu.ItemIndicator />
-            Live Mode
-          </Menu.RadioItem>
-          <Menu.RadioItem 
-            value="pet" 
-            onClick={() => {
-              if (isElectron) setMode('pet');
-            }}
-            disabled={!isElectron}
-            title={!isElectron ? "Pet mode is only available in desktop app" : undefined}
-          >
-            <Menu.ItemIndicator />
-            Pet Mode
-          </Menu.RadioItem>
-        </Menu.RadioItemGroup>
-      </Menu.Content>
-    </Menu.Positioner>
-  </Menu.Root>
-));
-
-ModeMenu.displayName = 'ModeMenu';
 
 const CeceHeader = memo(({ ceceMode }: { ceceMode: string }) => (
   <Box
@@ -86,72 +52,116 @@ const CeceHeader = memo(({ ceceMode }: { ceceMode: string }) => (
     borderColor="rgba(255, 255, 255, 0.06)"
     display="flex"
     alignItems="center"
-    gap={3}
+    justifyContent="space-between"
   >
-    <Box
-      w="36px"
-      h="36px"
-      borderRadius="10px"
-      bg="#76B900"
-      display="flex"
-      alignItems="center"
-      justifyContent="center"
-      flexShrink={0}
-      boxShadow="0 2px 8px rgba(118, 185, 0, 0.25)"
-    >
-      <TbSparkles size="20" color="white" />
-    </Box>
-    <Box flex={1}>
-      <Text fontSize="15px" fontWeight="600" color="#f0f0f5" letterSpacing="-0.01em">
-        CeCe AI
-      </Text>
-      <Text fontSize="11px" color="rgba(255,255,255,0.4)" mt="-1px">
-        Beauty Consultant
+    <Box display="flex" alignItems="center" gap={2.5}>
+      <Box
+        w="32px"
+        h="32px"
+        borderRadius="8px"
+        bg="#76B900"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        flexShrink={0}
+      >
+        <TbSparkles size="18" color="white" />
+      </Box>
+      <Text fontSize="16px" fontWeight="600" color="#f0f0f5" letterSpacing="-0.01em">
+        CeCe
       </Text>
     </Box>
-    <Badge
-      px={2}
-      py={0.5}
-      borderRadius="6px"
-      fontSize="10px"
-      fontWeight="600"
-      textTransform="uppercase"
-      letterSpacing="0.05em"
-      bg={ceceMode === 'training' ? 'rgba(245, 158, 11, 0.15)' : 'rgba(118, 185, 0, 0.12)'}
-      color={ceceMode === 'training' ? '#f59e0b' : '#76B900'}
-      border="1px solid"
-      borderColor={ceceMode === 'training' ? 'rgba(245, 158, 11, 0.25)' : 'rgba(118, 185, 0, 0.2)'}
-    >
-      {ceceMode === 'training' ? 'Training' : 'Live'}
-    </Badge>
+    <Box display="flex" gap={1} bg="rgba(255,255,255,0.04)" borderRadius="8px" p="2px">
+      <Box
+        px={3}
+        py={1}
+        borderRadius="6px"
+        fontSize="12px"
+        fontWeight="500"
+        cursor="pointer"
+        transition="all 0.15s ease"
+        bg={ceceMode !== 'training' ? 'rgba(118, 185, 0, 0.15)' : 'transparent'}
+        color={ceceMode !== 'training' ? '#76B900' : 'rgba(255,255,255,0.45)'}
+        _hover={{ color: ceceMode !== 'training' ? '#76B900' : 'rgba(255,255,255,0.7)' }}
+        userSelect="none"
+      >
+        Customer event
+      </Box>
+      <Box
+        px={3}
+        py={1}
+        borderRadius="6px"
+        fontSize="12px"
+        fontWeight="500"
+        cursor="pointer"
+        transition="all 0.15s ease"
+        bg={ceceMode === 'training' ? 'rgba(245, 158, 11, 0.15)' : 'transparent'}
+        color={ceceMode === 'training' ? '#f59e0b' : 'rgba(255,255,255,0.45)'}
+        _hover={{ color: ceceMode === 'training' ? '#f59e0b' : 'rgba(255,255,255,0.7)' }}
+        userSelect="none"
+      >
+        Associate training
+      </Box>
+    </Box>
   </Box>
 ));
 
 CeceHeader.displayName = 'CeceHeader';
 
+const IconWithLabel = memo(({ icon, label }: { icon: React.ReactNode, label: string }) => (
+  <Box display="flex" flexDirection="column" alignItems="center" gap={0.5}>
+    <Box fontSize="18px" lineHeight="1">{icon}</Box>
+    <Text fontSize="10px" color="inherit" lineHeight="1" userSelect="none">{label}</Text>
+  </Box>
+));
+IconWithLabel.displayName = 'IconWithLabel';
+
 const HeaderButtons = memo(({ onSettingsOpen, onNewHistory, setMode, currentMode, isElectron }: HeaderButtonsProps) => (
-  <Box display="flex" gap={1} px={2} py={1}>
-    <Button onClick={onSettingsOpen} size="sm" variant="ghost" color="rgba(255,255,255,0.6)" _hover={{ color: '#f0f0f5', bg: 'rgba(255,255,255,0.06)' }} title="Settings">
-      <TbSettings />
+  <Box display="flex" gap={0} px={1} py={1.5} justifyContent="space-around" borderBottom="1px solid" borderColor="rgba(255,255,255,0.04)">
+    <Button onClick={onSettingsOpen} size="sm" variant="ghost" color="rgba(255,255,255,0.5)" _hover={{ color: '#f0f0f5', bg: 'rgba(255,255,255,0.06)' }} px={3} py={2} height="auto">
+      <IconWithLabel icon={<TbSettings />} label="Settings" />
     </Button>
 
     <GroupDrawer>
-      <Button size="sm" variant="ghost" color="rgba(255,255,255,0.6)" _hover={{ color: '#f0f0f5', bg: 'rgba(255,255,255,0.06)' }} title="Contacts">
-        <TbUsers />
+      <Button size="sm" variant="ghost" color="rgba(255,255,255,0.5)" _hover={{ color: '#f0f0f5', bg: 'rgba(255,255,255,0.06)' }} px={3} py={2} height="auto">
+        <IconWithLabel icon={<TbUsers />} label="Contacts" />
       </Button>
     </GroupDrawer>
 
     <HistoryDrawer>
-      <Button size="sm" variant="ghost" color="rgba(255,255,255,0.6)" _hover={{ color: '#f0f0f5', bg: 'rgba(255,255,255,0.06)' }} title="History">
-        <TbClock />
+      <Button size="sm" variant="ghost" color="rgba(255,255,255,0.5)" _hover={{ color: '#f0f0f5', bg: 'rgba(255,255,255,0.06)' }} px={3} py={2} height="auto">
+        <IconWithLabel icon={<TbClock />} label="History" />
       </Button>
     </HistoryDrawer>
 
-    <Button onClick={onNewHistory} size="sm" variant="ghost" color="rgba(255,255,255,0.6)" _hover={{ color: '#f0f0f5', bg: 'rgba(255,255,255,0.06)' }} title="New conversation">
-      <TbPlus />
+    <Button onClick={onNewHistory} size="sm" variant="ghost" color="rgba(255,255,255,0.5)" _hover={{ color: '#f0f0f5', bg: 'rgba(255,255,255,0.06)' }} px={3} py={2} height="auto">
+      <IconWithLabel icon={<TbPlus />} label="New" />
     </Button>
 
-    <ModeMenu setMode={setMode} currentMode={currentMode} isElectron={isElectron} />
+    <Menu.Root>
+      <Menu.Trigger as={Button} size="sm" variant="ghost" color="rgba(255,255,255,0.5)" _hover={{ color: '#f0f0f5', bg: 'rgba(255,255,255,0.06)' }} px={3} py={2} height="auto">
+        <IconWithLabel icon={<TbStack2 />} label="Layers" />
+      </Menu.Trigger>
+      <Menu.Positioner>
+        <Menu.Content>
+          <Menu.RadioItemGroup value={currentMode}>
+            <Menu.RadioItem value="window" onClick={() => setMode('window')}>
+              <Menu.ItemIndicator />
+              Live Mode
+            </Menu.RadioItem>
+            <Menu.RadioItem
+              value="pet"
+              onClick={() => { if (isElectron) setMode('pet'); }}
+              disabled={!isElectron}
+              title={!isElectron ? "Pet mode is only available in desktop app" : undefined}
+            >
+              <Menu.ItemIndicator />
+              Pet Mode
+            </Menu.RadioItem>
+          </Menu.RadioItemGroup>
+        </Menu.Content>
+      </Menu.Positioner>
+    </Menu.Root>
   </Box>
 ));
 

@@ -19,14 +19,14 @@ export const footerStyles: {
 } = {
   footer: {
     container: (isCollapsed) => ({
-      bg: isCollapsed ? 'transparent' : '#161922',
-      borderTopRadius: isCollapsed ? 'none' : 'lg',
+      bg: isCollapsed ? 'transparent' : 'rgba(22, 25, 34, 0.9)',
+      backdropFilter: 'blur(12px)',
+      borderTopRadius: isCollapsed ? 'none' : '14px',
       transform: isCollapsed ? 'translateY(calc(100% - 24px))' : 'translateY(0)',
       transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
       height: '100%',
       position: 'relative',
       overflow: isCollapsed ? 'visible' : 'hidden',
-      pb: '4',
     }),
     toggleButton: {
       height: '24px',
@@ -87,20 +87,16 @@ export const footerStyles: {
   },
   aiIndicator: {
     container: {
-      bg: 'rgba(15, 17, 23, 0.75)',
-      backdropFilter: 'blur(8px)',
-      color: '#f0f0f5',
+      color: 'rgba(255,255,255,0.6)',
       px: '12px',
       height: '30px',
-      borderRadius: '20px',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      border: '1px solid rgba(118, 185, 0, 0.2)',
       overflow: 'hidden',
     },
     text: {
-      fontSize: '13px',
+      fontSize: '12px',
       fontWeight: '500',
       whiteSpace: 'nowrap',
       overflow: 'hidden',

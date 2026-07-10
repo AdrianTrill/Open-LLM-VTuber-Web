@@ -4,19 +4,16 @@ import { useTranslation } from 'react-i18next';
 import { canvasStyles } from './canvas-styles';
 import { useWSStatus } from '@/hooks/canvas/use-ws-status';
 
-// Type definitions
 interface StatusContentProps {
   textKey: string
 }
 
-// Reusable components
 const StatusContent: React.FC<StatusContentProps> = ({ textKey }) => {
   const { t } = useTranslation();
   return t(textKey);
 };
 const MemoizedStatusContent = memo(StatusContent);
 
-// Main component
 const WebSocketStatus = memo((): JSX.Element => {
   const {
     color, textKey, handleClick, isDisconnected,
@@ -25,13 +22,19 @@ const WebSocketStatus = memo((): JSX.Element => {
   return (
     <Box
       {...canvasStyles.wsStatus.container}
-      backgroundColor={color}
       onClick={handleClick}
       cursor={isDisconnected ? 'pointer' : 'default'}
       _hover={{
         opacity: isDisconnected ? 0.8 : 1,
       }}
     >
+      <Box
+        w="7px"
+        h="7px"
+        borderRadius="full"
+        bg={color}
+        flexShrink={0}
+      />
       <MemoizedStatusContent textKey={textKey} />
     </Box>
   );

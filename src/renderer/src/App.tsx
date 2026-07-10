@@ -130,18 +130,25 @@ function AppContent(): JSX.Element {
                 zIndex={10}
                 display="flex"
                 alignItems="center"
-                gap={2}
+                gap={0}
+                bg="rgba(15, 17, 23, 0.7)"
+                backdropFilter="blur(10px)"
+                borderRadius="20px"
+                border="1px solid rgba(255,255,255,0.08)"
+                overflow="hidden"
               >
                 <WebSocketStatus />
+                <Box w="1px" h="16px" bg="rgba(255,255,255,0.1)" />
                 <AIStateIndicator />
               </Box>
               <Box
                 position="absolute"
-                bottom={isFooterCollapsed ? "39px" : "135px"}
+                bottom={isFooterCollapsed ? "39px" : "80px"}
                 left="50%"
                 transform="translateX(-50%)"
                 zIndex={10}
-                width="60%"
+                display="flex"
+                justifyContent="center"
               >
                 <Subtitle />
               </Box>

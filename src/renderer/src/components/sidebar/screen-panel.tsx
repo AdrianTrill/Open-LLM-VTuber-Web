@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { Box, Text } from "@chakra-ui/react";
-import { FiMonitor } from "react-icons/fi";
+import { TbDeviceDesktop } from "react-icons/tb";
 import { useTranslation } from "react-i18next";
 import { Tooltip } from "@/components/ui/tooltip";
 import { sidebarStyles } from "./sidebar-styles";
@@ -35,7 +35,7 @@ function ScreenPlaceholder() {
       alignItems="center"
       gap={2}
     >
-      <FiMonitor size={24} />
+      <TbDeviceDesktop size={24} />
       <Text color="whiteAlpha.600" fontSize="sm" textAlign="center">
         {t('footer.screenControl')}
       </Text>

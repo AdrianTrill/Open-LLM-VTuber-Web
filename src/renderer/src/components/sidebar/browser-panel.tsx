@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/iframe-has-title */
 import { Box, Text } from "@chakra-ui/react";
-import { FiGlobe } from "react-icons/fi";
+import { TbWorld } from "react-icons/tb";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Tooltip } from "@/components/ui/tooltip";
@@ -18,7 +18,7 @@ function BrowserPlaceholder() {
       alignItems="center"
       gap={2}
     >
-      <FiGlobe size={24} />
+      <TbWorld size={24} />
       <Text color="whiteAlpha.600" fontSize="sm" textAlign="center">
         {t('sidebar.noBrowserSession')}
       </Text>

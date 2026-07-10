@@ -50,7 +50,7 @@ export const layoutStyles = {
   },
   footer: {
     width: '100%',
-    height: { base: '100px', md: '120px' },
+    height: { base: '80px', md: '90px' },
     transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
     willChange: 'transform',
     position: 'relative',
@@ -69,7 +69,7 @@ export const layoutStyles = {
     zIndex: 10,
   },
   canvasHeight: (isFooterCollapsed: boolean) => ({
-    height: isFooterCollapsed ? 'calc(100% - 24px)' : 'calc(100% - 120px)',
+    height: isFooterCollapsed ? 'calc(100% - 24px)' : 'calc(100% - 90px)',
   }),
   sidebarToggleButton: {
     position: 'absolute',
