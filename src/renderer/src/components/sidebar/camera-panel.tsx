@@ -1,12 +1,11 @@
 import { useEffect } from 'react';
 import { Box, Text } from '@chakra-ui/react';
-import { TbCamera } from 'react-icons/tb';
+import { TbCamera, TbChevronRight } from 'react-icons/tb';
 import { useTranslation } from 'react-i18next';
 import { Tooltip } from '@/components/ui/tooltip';
 import { sidebarStyles } from './sidebar-styles';
 import { useCameraPanel } from '@/hooks/sidebar/use-camera-panel';
 
-// Reusable components
 function LiveIndicator() {
   const { t } = useTranslation();
 
@@ -14,25 +13,6 @@ function LiveIndicator() {
     <Box color="red.500" display="flex" alignItems="center" gap={2}>
       <Box w="8px" h="8px" borderRadius="full" bg="red.500" animation="pulse 2s infinite" />
       <Text fontSize="sm">{t('sidebar.live')}</Text>
-    </Box>
-  );
-}
-
-function CameraPlaceholder() {
-  const { t } = useTranslation();
-
-  return (
-    <Box
-      position="absolute"
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-      gap={2}
-    >
-      <TbCamera size={24} />
-      <Text color="whiteAlpha.600" fontSize="sm" textAlign="center">
-        {t('footer.cameraControl')}
-      </Text>
     </Box>
   );
 }
@@ -56,7 +36,6 @@ function VideoStream({
   );
 }
 
-// Main component
 function CameraPanel(): JSX.Element {
   const { t } = useTranslation();
   const {
@@ -75,6 +54,27 @@ function CameraPanel(): JSX.Element {
       videoRef.current.srcObject = stream;
     }
   }, [stream]);
+
+  if (!isStreaming && !error) {
+    return (
+      <Box
+        display="flex"
+        alignItems="center"
+        gap={2}
+        px={3}
+        py={2.5}
+        cursor="pointer"
+        color="rgba(255,255,255,0.5)"
+        _hover={{ color: 'rgba(255,255,255,0.7)', bg: 'rgba(255,255,255,0.03)' }}
+        transition="all 0.15s ease"
+        onClick={toggleCamera}
+      >
+        <TbCamera size={16} />
+        <Text fontSize="13px" flex={1}>Camera off</Text>
+        <TbChevronRight size={14} />
+      </Box>
+    );
+  }
 
   return (
     <Box {...sidebarStyles.cameraPanel.container}>
@@ -103,10 +103,7 @@ function CameraPanel(): JSX.Element {
               {error}
             </Text>
           ) : (
-            <>
-              <VideoStream videoRef={videoRef} isStreaming={isStreaming} />
-              {!isStreaming && <CameraPlaceholder />}
-            </>
+            <VideoStream videoRef={videoRef} isStreaming={isStreaming} />
           )}
         </Box>
       </Tooltip>

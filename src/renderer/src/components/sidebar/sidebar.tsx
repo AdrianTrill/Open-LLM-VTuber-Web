@@ -59,13 +59,14 @@ const CeceHeader = memo(({ ceceMode }: { ceceMode: string }) => (
         w="32px"
         h="32px"
         borderRadius="8px"
-        bg="#76B900"
+        bg="#242838"
+        border="1px solid rgba(255,255,255,0.1)"
         display="flex"
         alignItems="center"
         justifyContent="center"
         flexShrink={0}
       >
-        <TbSparkles size="18" color="white" />
+        <TbSparkles size="18" color="#f0f0f5" />
       </Box>
       <Text fontSize="16px" fontWeight="600" color="#f0f0f5" letterSpacing="-0.01em">
         CeCe
@@ -80,9 +81,9 @@ const CeceHeader = memo(({ ceceMode }: { ceceMode: string }) => (
         fontWeight="500"
         cursor="pointer"
         transition="all 0.15s ease"
-        bg={ceceMode !== 'training' ? 'rgba(118, 185, 0, 0.15)' : 'transparent'}
-        color={ceceMode !== 'training' ? '#76B900' : 'rgba(255,255,255,0.45)'}
-        _hover={{ color: ceceMode !== 'training' ? '#76B900' : 'rgba(255,255,255,0.7)' }}
+        bg={ceceMode !== 'training' ? 'rgba(255, 255, 255, 0.08)' : 'transparent'}
+        color={ceceMode !== 'training' ? '#f0f0f5' : 'rgba(255,255,255,0.4)'}
+        _hover={{ color: ceceMode !== 'training' ? '#f0f0f5' : 'rgba(255,255,255,0.65)' }}
         userSelect="none"
       >
         Customer event
@@ -95,9 +96,9 @@ const CeceHeader = memo(({ ceceMode }: { ceceMode: string }) => (
         fontWeight="500"
         cursor="pointer"
         transition="all 0.15s ease"
-        bg={ceceMode === 'training' ? 'rgba(245, 158, 11, 0.15)' : 'transparent'}
-        color={ceceMode === 'training' ? '#f59e0b' : 'rgba(255,255,255,0.45)'}
-        _hover={{ color: ceceMode === 'training' ? '#f59e0b' : 'rgba(255,255,255,0.7)' }}
+        bg={ceceMode === 'training' ? 'rgba(255, 255, 255, 0.08)' : 'transparent'}
+        color={ceceMode === 'training' ? '#f0f0f5' : 'rgba(255,255,255,0.4)'}
+        _hover={{ color: ceceMode === 'training' ? '#f0f0f5' : 'rgba(255,255,255,0.65)' }}
         userSelect="none"
       >
         Associate training
