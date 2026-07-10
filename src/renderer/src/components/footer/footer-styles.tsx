@@ -19,7 +19,7 @@ export const footerStyles: {
 } = {
   footer: {
     container: (isCollapsed) => ({
-      bg: isCollapsed ? 'transparent' : 'gray.800',
+      bg: isCollapsed ? 'transparent' : '#161922',
       borderTopRadius: isCollapsed ? 'none' : 'lg',
       transform: isCollapsed ? 'translateY(calc(100% - 24px))' : 'translateY(0)',
       transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -34,8 +34,8 @@ export const footerStyles: {
       alignItems: 'center',
       justifyContent: 'center',
       cursor: 'pointer',
-      color: 'whiteAlpha.700',
-      _hover: { color: 'white' },
+      color: 'rgba(255, 255, 255, 0.5)',
+      _hover: { color: '#f0f0f5' },
       bg: 'transparent',
       transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
     },
@@ -46,20 +46,22 @@ export const footerStyles: {
       minW: '50px',
     },
     input: {
-      bg: 'gray.700',
-      border: 'none',
+      bg: '#1c2030',
+      border: '1px solid',
+      borderColor: 'rgba(255, 255, 255, 0.08)',
       height: '80px',
       borderRadius: '12px',
       fontSize: '18px',
       pl: '12',
       pr: '4',
-      color: 'whiteAlpha.900',
+      color: '#f0f0f5',
       _placeholder: {
-        color: 'whiteAlpha.500',
+        color: 'rgba(255, 255, 255, 0.35)',
       },
       _focus: {
-        border: 'none',
-        bg: 'gray.700',
+        borderColor: 'rgba(118, 185, 0, 0.4)',
+        bg: '#1c2030',
+        boxShadow: '0 0 0 1px rgba(118, 185, 0, 0.2)',
       },
       resize: 'none',
       minHeight: '80px',
@@ -75,17 +77,17 @@ export const footerStyles: {
       left: '1',
       top: '50%',
       transform: 'translateY(-50%)',
-      color: 'whiteAlpha.700',
+      color: 'rgba(255, 255, 255, 0.5)',
       zIndex: 2,
       _hover: {
         bg: 'transparent',
-        color: 'white',
+        color: '#f0f0f5',
       },
     },
   },
   aiIndicator: {
     container: {
-      bg: '#7C5CFF',
+      bg: '#76B900',
       color: 'white',
       width: '110px',
       height: '30px',
@@ -93,7 +95,7 @@ export const footerStyles: {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      boxShadow: '0 2px 6px rgba(0,0,0,0.1)',
+      boxShadow: '0 2px 8px rgba(118, 185, 0, 0.2)',
       overflow: 'hidden',
     },
     text: {

@@ -23,6 +23,7 @@ import TTS from './tts';
 import Agent from './agent';
 import Persona from './persona';
 import Knowledge from './knowledge';
+import Mode from './mode';
 
 interface SettingUIProps {
   open: boolean;
@@ -93,6 +94,9 @@ function SettingUI({ open, onClose }: SettingUIProps): JSX.Element {
         <Tabs.Content value="knowledge" {...settingStyles.settingUI.tabs.content}>
           <Knowledge />
         </Tabs.Content>
+        <Tabs.Content value="mode" {...settingStyles.settingUI.tabs.content}>
+          <Mode />
+        </Tabs.Content>
       </Tabs.ContentGroup>
     ),
     [handleSaveCallback, handleCancelCallback],
@@ -136,7 +140,7 @@ function SettingUI({ open, onClose }: SettingUIProps): JSX.Element {
             {...settingStyles.settingUI.tabs.root}
           >
             <Tabs.List {...settingStyles.settingUI.tabs.list}>
-              {(['general', 'live2d', 'asr', 'tts', 'agent', 'persona', 'knowledge'] as const).map((tab) => (
+              {(['general', 'live2d', 'asr', 'tts', 'agent', 'persona', 'knowledge', 'mode'] as const).map((tab) => (
                 <Tabs.Trigger
                   key={tab}
                   value={tab}
@@ -152,10 +156,10 @@ function SettingUI({ open, onClose }: SettingUIProps): JSX.Element {
         </DrawerBody>
 
         <DrawerFooter>
-          <Button colorPalette="red" onClick={handleCancel}>
+          <Button variant="ghost" color="rgba(255,255,255,0.6)" onClick={handleCancel}>
             {t('common.cancel')}
           </Button>
-          <Button colorPalette="blue" onClick={handleSave}>
+          <Button bg="#76B900" color="white" _hover={{ bg: '#6aaa00' }} onClick={handleSave}>
             {t('common.save')}
           </Button>
         </DrawerFooter>

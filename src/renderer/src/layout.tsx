@@ -7,14 +7,12 @@ const getAppHeight = () => {
   return isElectron ? 'calc(100vh - 30px)' : '100vh';
 };
 
-
-
 export const layoutStyles = {
   appContainer: {
     width: '100vw',
     height: getAppHeight(),
-    bg: 'gray.900',
-    color: 'white',
+    bg: '#0f1117',
+    color: '#f0f0f5',
     overflow: 'hidden',
     position: 'relative',
     display: 'flex',
@@ -25,9 +23,9 @@ export const layoutStyles = {
     position: 'relative' as const,
     width: { base: '100%', md: '440px' },
     height: { base: 'auto', md: '100%' },
-    bg: 'gray.800',
+    bg: '#161922',
     borderRight: '1px solid',
-    borderColor: 'whiteAlpha.200',
+    borderColor: 'rgba(255, 255, 255, 0.08)',
     overflow: 'hidden',
     flexShrink: 0,
     transition: 'all 0.2s',
@@ -64,8 +62,8 @@ export const layoutStyles = {
     top: '50%',
     transform: 'translateY(-50%)',
     height: '60px',
-    bg: 'whiteAlpha.100',
-    _hover: { bg: 'whiteAlpha.200' },
+    bg: 'rgba(255, 255, 255, 0.05)',
+    _hover: { bg: 'rgba(255, 255, 255, 0.1)' },
     borderLeftRadius: 0,
     borderRightRadius: 'md',
     zIndex: 10,
@@ -79,7 +77,7 @@ export const layoutStyles = {
     top: '50%',
     transform: 'translateY(-50%)',
     height: '60px',
-    bg: 'gray.800',
+    bg: '#161922',
     borderLeftRadius: 0,
     borderRightRadius: 'md',
     zIndex: 10,
@@ -97,7 +95,7 @@ export const layoutStyles = {
     alignItems: 'center',
     justifyContent: 'space-between',
     height: '30px',
-    backgroundColor: 'gray.800',
+    backgroundColor: '#0f1117',
     paddingX: '10px',
     zIndex: 1000,
     css: { '-webkit-app-region': 'drag' },
@@ -111,7 +109,7 @@ export const layoutStyles = {
     alignItems: 'center',
     justifyContent: 'center',
     height: '30px',
-    backgroundColor: 'gray.800',
+    backgroundColor: '#0f1117',
     zIndex: 1000,
     css: {
       '-webkit-app-region': 'drag',
@@ -120,7 +118,7 @@ export const layoutStyles = {
   },
   titleBarTitle: {
     fontSize: 'sm',
-    color: 'whiteAlpha.800',
+    color: 'rgba(255, 255, 255, 0.7)',
     textAlign: 'center',
   },
   titleBarButtons: {
@@ -130,14 +128,14 @@ export const layoutStyles = {
   titleBarButton: {
     size: 'sm',
     variant: 'ghost',
-    color: 'whiteAlpha.800',
+    color: 'rgba(255, 255, 255, 0.7)',
     css: { '-webkit-app-region': 'no-drag' },
-    _hover: { backgroundColor: 'whiteAlpha.200' },
+    _hover: { backgroundColor: 'rgba(255, 255, 255, 0.1)' },
   },
   closeButton: {
     size: 'sm',
     variant: 'ghost',
-    color: 'whiteAlpha.800',
+    color: 'rgba(255, 255, 255, 0.7)',
     css: { '-webkit-app-region': 'no-drag' },
     _hover: { backgroundColor: 'red.500' },
   },

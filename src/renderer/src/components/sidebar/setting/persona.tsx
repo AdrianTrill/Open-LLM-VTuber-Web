@@ -28,7 +28,7 @@ function Persona(): JSX.Element {
   const [status, setStatus] = useState<{ msg: string; ok: boolean } | null>(null);
   const [saving, setSaving] = useState(false);
 
-  const apiBase = '';
+  const apiBase = localStorage.getItem('baseUrl') || '';
 
   useEffect(() => {
     fetch(`${apiBase}/api/persona`)
@@ -75,7 +75,7 @@ function Persona(): JSX.Element {
   return (
     <Stack gap={5} p={4}>
       <Box>
-        <Text fontSize="xs" fontWeight="600" textTransform="uppercase" color="whiteAlpha.600" mb={2}>
+        <Text fontSize="xs" fontWeight="600" textTransform="uppercase" color="rgba(255,255,255,0.45)" mb={2} letterSpacing="0.05em">
           {t('persona.presets')}
         </Text>
         <Flex wrap="wrap" gap={2}>
@@ -86,9 +86,11 @@ function Persona(): JSX.Element {
                 key={name}
                 size="xs"
                 variant="solid"
-                bg={isActive ? 'blue.500' : 'gray.600'}
+                bg={isActive ? '#76B900' : '#1c2030'}
                 color="white"
-                _hover={{ bg: isActive ? 'blue.400' : 'gray.500' }}
+                border="1px solid"
+                borderColor={isActive ? '#76B900' : 'rgba(255,255,255,0.08)'}
+                _hover={{ bg: isActive ? '#6aaa00' : 'rgba(255,255,255,0.06)' }}
                 onClick={() => {
                   setPrompt(PRESETS[name]);
                   setActivePreset(name);
@@ -109,9 +111,10 @@ function Persona(): JSX.Element {
           <Badge size="sm" colorPalette="gray">{prompt.length} chars</Badge>
         </Flex>
         <Textarea
-          bg="gray.800"
-          borderColor="whiteAlpha.200"
-          color="white"
+          bg="#1c2030"
+          borderColor="rgba(255,255,255,0.08)"
+          color="#f0f0f5"
+          _focus={{ borderColor: 'rgba(118, 185, 0, 0.4)', boxShadow: '0 0 0 1px rgba(118, 185, 0, 0.2)' }}
           fontFamily="mono"
           fontSize="sm"
           minH="200px"
@@ -128,10 +131,8 @@ function Persona(): JSX.Element {
       <Flex gap={3} justify="flex-end">
         <Button
           size="sm"
-          variant="solid"
-          bg="gray.600"
-          color="white"
-          _hover={{ bg: 'gray.500' }}
+          variant="ghost"
+          color="rgba(255,255,255,0.6)"
           onClick={() => {
             setPrompt(originalPrompt);
             setActivePreset(null);
@@ -141,7 +142,9 @@ function Persona(): JSX.Element {
         </Button>
         <Button
           size="sm"
-          colorPalette="blue"
+          bg="#76B900"
+          color="white"
+          _hover={{ bg: '#6aaa00' }}
           loading={saving}
           onClick={handleSave}
         >

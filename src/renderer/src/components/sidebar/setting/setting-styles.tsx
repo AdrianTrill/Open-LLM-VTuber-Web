@@ -13,11 +13,10 @@ export const settingStyles = {
           width: '4px',
         },
         '&::-webkit-scrollbar-track': {
-          bg: 'whiteAlpha.100',
-          borderRadius: 'full',
+          bg: 'transparent',
         },
         '&::-webkit-scrollbar-thumb': {
-          bg: 'whiteAlpha.300',
+          bg: 'rgba(255, 255, 255, 0.15)',
           borderRadius: 'full',
         },
       },
@@ -41,17 +40,21 @@ export const settingStyles = {
       },
       content: {},
       trigger: {
-        color: 'whiteAlpha.600',
+        color: 'rgba(255, 255, 255, 0.45)',
         css: {
           fontSize: '11px',
-          padding: '4px 6px',
+          padding: '5px 10px',
           minWidth: 'unset',
+          borderRadius: '6px',
+          transition: 'all 0.15s ease',
         },
         _selected: {
-          color: 'white',
+          color: '#fff',
+          bg: 'rgba(118, 185, 0, 0.15)',
         },
         _hover: {
-          color: 'white',
+          color: 'rgba(255, 255, 255, 0.85)',
+          bg: 'rgba(255, 255, 255, 0.05)',
         },
       },
       list: {
@@ -60,11 +63,12 @@ export const settingStyles = {
         justifyContent: 'flex-start',
         width: '100%',
         borderBottom: '1px solid',
-        borderColor: 'whiteAlpha.200',
+        borderColor: 'rgba(255, 255, 255, 0.08)',
         mb: 4,
+        pb: 2,
         pl: 0,
         css: {
-          gap: '2px 4px',
+          gap: '4px 6px',
         },
       },
     },
@@ -76,14 +80,14 @@ export const settingStyles = {
       mt: 'auto',
       pt: 4,
       borderTop: '1px solid',
-      borderColor: 'whiteAlpha.200',
+      borderColor: 'rgba(255, 255, 255, 0.08)',
     },
     drawerContent: {
-      bg: 'gray.900',
+      bg: '#0f1117',
       maxWidth: '540px',
       height: isElectron ? 'calc(100vh - 30px)' : '100vh',
-      borderLeft: '1px solid',
-      borderColor: 'whiteAlpha.200',
+      borderRight: '1px solid',
+      borderColor: 'rgba(118, 185, 0, 0.15)',
     },
     drawerHeader: {
       display: 'flex',
@@ -93,18 +97,19 @@ export const settingStyles = {
       position: 'relative',
       px: 6,
       py: 4,
+      borderBottom: '1px solid',
+      borderColor: 'rgba(255, 255, 255, 0.06)',
     },
     drawerTitle: {
-      color: 'white',
+      color: '#f0f0f5',
       fontSize: 'lg',
-      fontWeight: 'semibold',
+      fontWeight: '600',
     },
     closeButton: {
       position: 'absolute',
       right: 1,
       top: 1,
-      color: 'white',
-
+      color: 'rgba(255, 255, 255, 0.6)',
     },
   },
   general: {
@@ -115,20 +120,28 @@ export const settingStyles = {
     },
     field: {
       label: {
-        color: 'whiteAlpha.800',
+        color: 'rgba(255, 255, 255, 0.7)',
       },
     },
     select: {
       root: {
         colorPalette: 'gray',
-        bg: 'gray.800',
+        bg: '#1c2030',
       },
       trigger: {
-        bg: 'gray.800',
+        bg: '#1c2030',
+        borderColor: 'rgba(255, 255, 255, 0.08)',
+        _hover: {
+          borderColor: 'rgba(118, 185, 0, 0.3)',
+        },
       },
     },
     input: {
-      bg: 'gray.800',
+      bg: '#1c2030',
+      borderColor: 'rgba(255, 255, 255, 0.08)',
+      _hover: {
+        borderColor: 'rgba(118, 185, 0, 0.3)',
+      },
     },
     buttonGroup: {
       gap: 4,
@@ -137,15 +150,16 @@ export const settingStyles = {
     button: {
       width: '50%',
       variant: 'outline' as const,
-      bg: 'blue',
+      bg: '#76B900',
       color: 'white',
+      borderColor: '#76B900',
       _hover: {
-        bg: 'whiteAlpha.300',
+        bg: '#6aaa00',
       },
     },
     fieldLabel: {
       fontSize: '14px',
-      color: 'gray.600',
+      color: 'rgba(255, 255, 255, 0.5)',
     },
   },
   common: {
@@ -154,12 +168,12 @@ export const settingStyles = {
     },
     fieldLabel: {
       fontSize: 'sm',
-      color: 'whiteAlpha.800',
+      color: 'rgba(255, 255, 255, 0.7)',
       whiteSpace: 'nowrap' as const,
     },
     switch: {
       size: 'md' as const,
-      colorPalette: 'blue' as const,
+      colorPalette: 'green' as const,
       variant: 'solid' as const,
     },
     numberInput: {
@@ -168,10 +182,10 @@ export const settingStyles = {
         inputMode: 'decimal' as const,
       },
       input: {
-        bg: 'whiteAlpha.100',
-        borderColor: 'whiteAlpha.200',
+        bg: '#1c2030',
+        borderColor: 'rgba(255, 255, 255, 0.08)',
         _hover: {
-          bg: 'whiteAlpha.200',
+          borderColor: 'rgba(118, 185, 0, 0.3)',
         },
       },
     },
@@ -181,10 +195,10 @@ export const settingStyles = {
       css: { '--field-label-width': '120px' },
     },
     input: {
-      bg: 'whiteAlpha.100',
-      borderColor: 'whiteAlpha.200',
+      bg: '#1c2030',
+      borderColor: 'rgba(255, 255, 255, 0.08)',
       _hover: {
-        bg: 'whiteAlpha.200',
+        borderColor: 'rgba(118, 185, 0, 0.3)',
       },
     },
   },
@@ -203,7 +217,7 @@ export const settingStyles = {
         mb: 2,
       },
       button: {
-        colorPalette: 'blue',
+        colorPalette: 'green',
         mt: 2,
       },
       deleteButton: {

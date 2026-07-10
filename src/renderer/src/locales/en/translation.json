@@ -15,6 +15,7 @@
       "agent": "Agent",
       "persona": "Persona",
       "knowledge": "Knowledge",
+      "mode": "Mode",
       "about": "About"
     },
     "general": {

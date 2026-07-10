@@ -8,24 +8,23 @@ const commonStyles = {
       width: '4px',
     },
     '&::-webkit-scrollbar-track': {
-      bg: 'whiteAlpha.100',
-      borderRadius: 'full',
+      bg: 'transparent',
     },
     '&::-webkit-scrollbar-thumb': {
-      bg: 'whiteAlpha.300',
+      bg: 'rgba(255, 255, 255, 0.12)',
       borderRadius: 'full',
     },
   },
   panel: {
     border: '1px solid',
-    borderColor: 'whiteAlpha.200',
+    borderColor: 'rgba(255, 255, 255, 0.06)',
     borderRadius: 'lg',
-    bg: 'blackAlpha.400',
+    bg: 'rgba(0, 0, 0, 0.25)',
   },
   title: {
     fontSize: 'lg',
-    fontWeight: 'semibold',
-    color: 'white',
+    fontWeight: '600',
+    color: '#f0f0f5',
     mb: 4,
   },
 };
@@ -38,7 +37,7 @@ export const sidebarStyles = {
       top: 0,
       height: '100%',
       width: '440px',
-      bg: 'gray.900',
+      bg: '#161922',
       transform: isCollapsed
         ? 'translateX(calc(-100% + 24px))'
         : 'translateX(0)',
@@ -183,9 +182,9 @@ export const sidebarStyles = {
       },
     },
     historyItemSelected: {
-      bg: 'whiteAlpha.200',
+      bg: 'rgba(118, 185, 0, 0.1)',
       borderLeft: '3px solid',
-      borderColor: 'blue.500',
+      borderColor: '#76B900',
     },
     historyHeader: {
       display: 'flex',
@@ -218,7 +217,7 @@ export const sidebarStyles = {
     },
     drawer: {
       content: {
-        background: 'var(--chakra-colors-gray-900)',
+        background: '#0f1117',
         maxWidth: '440px',
         marginTop: isElectron ? '30px' : '0',
         height: isElectron ? 'calc(100vh - 30px)' : '100vh',
@@ -482,38 +481,39 @@ export const sidebarStyles = {
 
 export const chatPanelStyles = css`
   .cs-message-list {
-    background: var(--chakra-colors-gray-900) !important;
-    padding: var(--chakra-space-4);
+    background: #161922 !important;
+    padding: 12px;
   }
   
   .cs-message {
-    margin: 12px 0;
-    // padding-top: 20px !important;
+    margin: 10px 0;
   }
 
   .cs-message__content {
-    background-color: var(--chakra-colors-gray-700) !important;
-    border-radius: var(--chakra-radii-md);
-    padding: 8px !important;
-    color: var(--chakra-colors-white) !important;
-    font-size: 0.95rem !important;
-    line-height: 1.5 !important;
+    background-color: #1c2030 !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    border-radius: 12px !important;
+    padding: 10px 14px !important;
+    color: #f0f0f5 !important;
+    font-size: 0.9rem !important;
+    line-height: 1.55 !important;
     margin-top: 4px !important;
   }
 
   .cs-message__text {
-    padding: 8px 0 !important;
+    padding: 6px 0 !important;
   }
 
   .cs-message--outgoing .cs-message__content {
-    background-color: var(--chakra-colors-gray-600) !important;
+    background-color: rgba(118, 185, 0, 0.12) !important;
+    border-color: rgba(118, 185, 0, 0.15) !important;
   }
 
   .cs-chat-container {
     background: transparent !important;
-    border: 1px solid var(--chakra-colors-whiteAlpha-200);
-    border-radius: var(--chakra-radii-lg);
-    padding: var(--chakra-space-2);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 6px;
   }
 
   .cs-main-container {
@@ -527,9 +527,9 @@ export const chatPanelStyles = css`
     position: absolute !important;
     top: 0 !important;
     left: 36px !important;
-    font-size: 0.875rem !important;
-    font-weight: 600 !important;
-    color: var(--chakra-colors-whiteAlpha-900) !important;
+    font-size: 0.8rem !important;
+    font-weight: 500 !important;
+    color: rgba(255, 255, 255, 0.6) !important;
   }
 
   .cs-message__content-wrapper {
@@ -538,7 +538,7 @@ export const chatPanelStyles = css`
   }
 
   .cs-avatar {
-    background-color: var(--chakra-colors-blue-500) !important;
+    background-color: #76B900 !important;
     color: white !important;
     width: 28px !important;
     height: 28px !important;
@@ -550,7 +550,7 @@ export const chatPanelStyles = css`
   }
 
   .cs-message--outgoing .cs-avatar {
-    background-color: var(--chakra-colors-green-500) !important;
+    background-color: #3b82f6 !important;
   }
 
   .cs-message__header {

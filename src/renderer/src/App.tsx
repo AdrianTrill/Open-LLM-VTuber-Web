@@ -1,6 +1,7 @@
 /* eslint-disable no-shadow */
 // import { StrictMode } from 'react';
-import { Box, Flex, ChakraProvider, defaultSystem } from "@chakra-ui/react";
+import { Box, Flex, ChakraProvider } from "@chakra-ui/react";
+import { ceceSystem } from "./theme";
 import { useState, useEffect, useRef } from "react";
 // import Canvas from './components/canvas/canvas'; // Likely unused now
 import Sidebar from "./components/sidebar/sidebar";
@@ -157,7 +158,7 @@ function AppContent(): JSX.Element {
 
 function App(): JSX.Element {
   return (
-    <ChakraProvider value={defaultSystem}>
+    <ChakraProvider value={ceceSystem}>
       {/* ModeProvider needs to wrap AppContent to provide mode to getGlobalStyles */}
       <ModeProvider>
         <AppWithGlobalStyles />
