@@ -40,10 +40,10 @@ export const footerStyles: {
       transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
     },
     actionButton: {
-      borderRadius: '12px',
-      width: '50px',
-      height: '50px',
-      minW: '50px',
+      borderRadius: 'full',
+      width: '56px',
+      height: '56px',
+      minW: '56px',
     },
     input: {
       bg: '#1c2030',

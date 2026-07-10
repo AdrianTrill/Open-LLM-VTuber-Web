@@ -35,7 +35,7 @@ function ChatHistoryPanel(): JSX.Element {
     <Box
       h="full"
       overflow="hidden"
-      bg="gray.900"
+      bg="#161922"
     >
       <Global styles={chatPanelStyles} />
       <MainContainer>
@@ -44,13 +44,57 @@ function ChatHistoryPanel(): JSX.Element {
             {validMessages.length === 0 ? (
               <Box
                 display="flex"
+                flexDirection="column"
                 alignItems="center"
                 justifyContent="center"
                 height="100%"
-                color="whiteAlpha.500"
-                fontSize="sm"
+                px={6}
+                textAlign="center"
               >
-                {t('sidebar.noMessages')}
+                <Box
+                  w="52px"
+                  h="52px"
+                  borderRadius="14px"
+                  bg="#76B900"
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                  mb={4}
+                  boxShadow="0 4px 16px rgba(118, 185, 0, 0.25)"
+                >
+                  <Text fontSize="22px" fontWeight="800" color="white">C</Text>
+                </Box>
+                <Text fontSize="16px" fontWeight="600" color="#f0f0f5" mb={1}>
+                  Welcome to CeCe
+                </Text>
+                <Text fontSize="13px" color="rgba(255,255,255,0.4)" lineHeight="1.5" maxW="280px">
+                  Your AI beauty consultant. Ask about products, shades, techniques — or just say hi.
+                </Text>
+                <Box
+                  mt={5}
+                  display="flex"
+                  flexWrap="wrap"
+                  gap={2}
+                  justifyContent="center"
+                >
+                  {['Hair color tips', 'Skincare routine', 'Product recommendations'].map((q) => (
+                    <Box
+                      key={q}
+                      px={3}
+                      py={1.5}
+                      borderRadius="8px"
+                      border="1px solid rgba(255,255,255,0.08)"
+                      bg="rgba(255,255,255,0.03)"
+                      fontSize="12px"
+                      color="rgba(255,255,255,0.5)"
+                      cursor="default"
+                      _hover={{ borderColor: 'rgba(118,185,0,0.25)', color: 'rgba(255,255,255,0.7)' }}
+                      transition="all 0.15s ease"
+                    >
+                      {q}
+                    </Box>
+                  ))}
+                </Box>
               </Box>
             ) : (
               validMessages.map((msg) => {

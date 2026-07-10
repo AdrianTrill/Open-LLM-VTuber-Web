@@ -1,19 +1,17 @@
 /* eslint-disable react/require-default-props */
-import { Box, Button, Menu } from '@chakra-ui/react';
+import { Box, Button, Text, Badge, Menu } from '@chakra-ui/react';
 import {
   FiSettings, FiClock, FiPlus, FiChevronLeft, FiUsers, FiLayers
 } from 'react-icons/fi';
-import { memo } from 'react';
+import { memo, useState, useEffect } from 'react';
 import { sidebarStyles } from './sidebar-styles';
 import SettingUI from './setting/setting-ui';
 import ChatHistoryPanel from './chat-history-panel';
-import BottomTab from './bottom-tab';
 import HistoryDrawer from './history-drawer';
 import { useSidebar } from '@/hooks/sidebar/use-sidebar';
 import GroupDrawer from './group-drawer';
 import { ModeType } from '@/context/mode-context';
 
-// Type definitions
 interface SidebarProps {
   isCollapsed?: boolean
   onToggle: () => void
@@ -27,7 +25,6 @@ interface HeaderButtonsProps {
   isElectron: boolean
 }
 
-// Reusable components
 const ToggleButton = memo(({ isCollapsed, onToggle }: {
   isCollapsed: boolean
   onToggle: () => void
@@ -64,9 +61,7 @@ const ModeMenu = memo(({ setMode, currentMode, isElectron }: {
           <Menu.RadioItem 
             value="pet" 
             onClick={() => {
-              if (isElectron) {
-                setMode('pet');
-              }
+              if (isElectron) setMode('pet');
             }}
             disabled={!isElectron}
             title={!isElectron ? "Pet mode is only available in desktop app" : undefined}
@@ -82,25 +77,76 @@ const ModeMenu = memo(({ setMode, currentMode, isElectron }: {
 
 ModeMenu.displayName = 'ModeMenu';
 
+const CeceHeader = memo(({ ceceMode }: { ceceMode: string }) => (
+  <Box
+    px={4}
+    py={3}
+    borderBottom="1px solid"
+    borderColor="rgba(255, 255, 255, 0.06)"
+    display="flex"
+    alignItems="center"
+    gap={3}
+  >
+    <Box
+      w="36px"
+      h="36px"
+      borderRadius="10px"
+      bg="#76B900"
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+      flexShrink={0}
+      boxShadow="0 2px 8px rgba(118, 185, 0, 0.25)"
+    >
+      <Text fontSize="16px" fontWeight="800" color="white" lineHeight="1">C</Text>
+    </Box>
+    <Box flex={1}>
+      <Text fontSize="15px" fontWeight="600" color="#f0f0f5" letterSpacing="-0.01em">
+        CeCe AI
+      </Text>
+      <Text fontSize="11px" color="rgba(255,255,255,0.4)" mt="-1px">
+        Beauty Consultant
+      </Text>
+    </Box>
+    <Badge
+      px={2}
+      py={0.5}
+      borderRadius="6px"
+      fontSize="10px"
+      fontWeight="600"
+      textTransform="uppercase"
+      letterSpacing="0.05em"
+      bg={ceceMode === 'training' ? 'rgba(245, 158, 11, 0.15)' : 'rgba(118, 185, 0, 0.12)'}
+      color={ceceMode === 'training' ? '#f59e0b' : '#76B900'}
+      border="1px solid"
+      borderColor={ceceMode === 'training' ? 'rgba(245, 158, 11, 0.25)' : 'rgba(118, 185, 0, 0.2)'}
+    >
+      {ceceMode === 'training' ? 'Training' : 'Live'}
+    </Badge>
+  </Box>
+));
+
+CeceHeader.displayName = 'CeceHeader';
+
 const HeaderButtons = memo(({ onSettingsOpen, onNewHistory, setMode, currentMode, isElectron }: HeaderButtonsProps) => (
-  <Box display="flex" gap={1}>
-    <Button onClick={onSettingsOpen}>
+  <Box display="flex" gap={1} px={2} py={1}>
+    <Button onClick={onSettingsOpen} size="sm" variant="ghost" color="rgba(255,255,255,0.6)" _hover={{ color: '#f0f0f5', bg: 'rgba(255,255,255,0.06)' }}>
       <FiSettings />
     </Button>
 
     <GroupDrawer>
-      <Button>
+      <Button size="sm" variant="ghost" color="rgba(255,255,255,0.6)" _hover={{ color: '#f0f0f5', bg: 'rgba(255,255,255,0.06)' }}>
         <FiUsers />
       </Button>
     </GroupDrawer>
 
     <HistoryDrawer>
-      <Button>
+      <Button size="sm" variant="ghost" color="rgba(255,255,255,0.6)" _hover={{ color: '#f0f0f5', bg: 'rgba(255,255,255,0.06)' }}>
         <FiClock />
       </Button>
     </HistoryDrawer>
 
-    <Button onClick={onNewHistory}>
+    <Button onClick={onNewHistory} size="sm" variant="ghost" color="rgba(255,255,255,0.6)" _hover={{ color: '#f0f0f5', bg: 'rgba(255,255,255,0.06)' }}>
       <FiPlus />
     </Button>
 
@@ -115,9 +161,11 @@ const SidebarContent = memo(({
   onNewHistory, 
   setMode, 
   currentMode,
-  isElectron
-}: HeaderButtonsProps) => (
+  isElectron,
+  ceceMode,
+}: HeaderButtonsProps & { ceceMode: string }) => (
   <Box {...sidebarStyles.sidebar.content}>
+    <CeceHeader ceceMode={ceceMode} />
     <Box {...sidebarStyles.sidebar.header}>
       <HeaderButtons
         onSettingsOpen={onSettingsOpen}
@@ -128,13 +176,11 @@ const SidebarContent = memo(({
       />
     </Box>
     <ChatHistoryPanel />
-    <BottomTab />
   </Box>
 ));
 
 SidebarContent.displayName = 'SidebarContent';
 
-// Main component
 function Sidebar({ isCollapsed = false, onToggle }: SidebarProps): JSX.Element {
   const {
     settingsOpen,
@@ -145,6 +191,24 @@ function Sidebar({ isCollapsed = false, onToggle }: SidebarProps): JSX.Element {
     currentMode,
     isElectron,
   } = useSidebar();
+
+  const [ceceMode, setCeceMode] = useState('customer');
+
+  useEffect(() => {
+    const baseUrl = localStorage.getItem('baseUrl') || '';
+    fetch(`${baseUrl}/api/mode`)
+      .then((r) => r.json())
+      .then((d) => setCeceMode(d.mode || 'customer'))
+      .catch(() => {});
+
+    const interval = setInterval(() => {
+      fetch(`${baseUrl}/api/mode`)
+        .then((r) => r.json())
+        .then((d) => setCeceMode(d.mode || 'customer'))
+        .catch(() => {});
+    }, 10000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <Box {...sidebarStyles.sidebar.container(isCollapsed)}>
@@ -157,6 +221,7 @@ function Sidebar({ isCollapsed = false, onToggle }: SidebarProps): JSX.Element {
           setMode={setMode}
           currentMode={currentMode}
           isElectron={isElectron}
+          ceceMode={ceceMode}
         />
       )}
 

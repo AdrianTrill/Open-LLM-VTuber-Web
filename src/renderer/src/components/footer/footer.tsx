@@ -12,7 +12,6 @@ import { footerStyles } from './footer-styles';
 import AIStateIndicator from './ai-state-indicator';
 import { useFooter } from '@/hooks/footer/use-footer';
 
-// Type definitions
 interface FooterProps {
   isCollapsed?: boolean
   onToggle?: () => void
@@ -37,12 +36,11 @@ interface MessageInputProps {
   onCompositionEnd: () => void
 }
 
-// Reusable components
 const ToggleButton = memo(({ isCollapsed, onToggle }: ToggleButtonProps) => (
   <Box
     {...footerStyles.footer.toggleButton}
     onClick={onToggle}
-    color="whiteAlpha.500"
+    color="rgba(255,255,255,0.35)"
     style={{
       transform: isCollapsed ? 'rotate(180deg)' : 'rotate(0deg)',
     }}
@@ -54,21 +52,36 @@ const ToggleButton = memo(({ isCollapsed, onToggle }: ToggleButtonProps) => (
 ToggleButton.displayName = 'ToggleButton';
 
 const ActionButtons = memo(({ micOn, onMicToggle, onInterrupt }: ActionButtonsProps) => (
-  <HStack gap={2}>
+  <HStack gap={3}>
     <IconButton
-      bg={micOn ? 'green.500' : 'red.500'}
-      {...footerStyles.footer.actionButton}
+      bg={micOn ? '#76B900' : '#dc2626'}
+      color="white"
+      borderRadius="full"
+      width="56px"
+      height="56px"
+      minW="56px"
+      boxShadow={micOn ? '0 4px 14px rgba(118, 185, 0, 0.35)' : '0 4px 14px rgba(220, 38, 38, 0.3)'}
+      _hover={{ transform: 'scale(1.05)', boxShadow: micOn ? '0 6px 20px rgba(118, 185, 0, 0.45)' : '0 6px 20px rgba(220, 38, 38, 0.4)' }}
+      transition="all 0.2s ease"
       onClick={onMicToggle}
+      aria-label={micOn ? 'Mute microphone' : 'Unmute microphone'}
     >
-      {micOn ? <BsMicFill /> : <BsMicMuteFill />}
+      {micOn ? <BsMicFill size="22" /> : <BsMicMuteFill size="22" />}
     </IconButton>
     <IconButton
-      aria-label="Raise hand"
-      bg="yellow.500"
-      {...footerStyles.footer.actionButton}
+      aria-label="Interrupt"
+      bg="rgba(255,255,255,0.08)"
+      color="rgba(255,255,255,0.7)"
+      borderRadius="full"
+      width="44px"
+      height="44px"
+      minW="44px"
+      border="1px solid rgba(255,255,255,0.08)"
+      _hover={{ bg: 'rgba(255,255,255,0.12)', color: '#f0f0f5' }}
+      transition="all 0.2s ease"
       onClick={onInterrupt}
     >
-      <IoHandRightSharp size="24" />
+      <IoHandRightSharp size="20" />
     </IconButton>
   </HStack>
 ));
@@ -92,7 +105,7 @@ const MessageInput = memo(({
           variant="ghost"
           {...footerStyles.footer.attachButton}
         >
-          <BsPaperclip size="24" />
+          <BsPaperclip size="20" />
         </IconButton>
         <Textarea
           value={value}
@@ -110,7 +123,6 @@ const MessageInput = memo(({
 
 MessageInput.displayName = 'MessageInput';
 
-// Main component
 function Footer({ isCollapsed = false, onToggle }: FooterProps): JSX.Element {
   const {
     inputValue,
@@ -128,11 +140,9 @@ function Footer({ isCollapsed = false, onToggle }: FooterProps): JSX.Element {
       <ToggleButton isCollapsed={isCollapsed} onToggle={onToggle} />
 
       <Box pt="0" px="4">
-        <HStack width="100%" gap={4}>
-          <Box>
-            <Box mb="1.5">
-              <AIStateIndicator />
-            </Box>
+        <HStack width="100%" gap={4} alignItems="center">
+          <Box display="flex" flexDirection="column" alignItems="center" gap={2}>
+            <AIStateIndicator />
             <ActionButtons
               micOn={micOn}
               onMicToggle={handleMicToggle}
