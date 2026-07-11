@@ -44,7 +44,7 @@ const ToggleButton = memo(({ isCollapsed, onToggle }: {
 ToggleButton.displayName = 'ToggleButton';
 
 
-const CeceHeader = memo(({ ceceMode }: { ceceMode: string }) => (
+const CeceHeader = memo(({ ceceMode, onModeChange }: { ceceMode: string, onModeChange: (mode: string) => void }) => (
   <Box
     px={4}
     py={3}
@@ -85,6 +85,7 @@ const CeceHeader = memo(({ ceceMode }: { ceceMode: string }) => (
         color={ceceMode !== 'training' ? '#f0f0f5' : 'rgba(255,255,255,0.4)'}
         _hover={{ color: ceceMode !== 'training' ? '#f0f0f5' : 'rgba(255,255,255,0.65)' }}
         userSelect="none"
+        onClick={() => onModeChange('customer')}
       >
         Customer event
       </Box>
@@ -100,6 +101,7 @@ const CeceHeader = memo(({ ceceMode }: { ceceMode: string }) => (
         color={ceceMode === 'training' ? '#f0f0f5' : 'rgba(255,255,255,0.4)'}
         _hover={{ color: ceceMode === 'training' ? '#f0f0f5' : 'rgba(255,255,255,0.65)' }}
         userSelect="none"
+        onClick={() => onModeChange('training')}
       >
         Associate training
       </Box>
@@ -175,9 +177,10 @@ const SidebarContent = memo(({
   currentMode,
   isElectron,
   ceceMode,
-}: HeaderButtonsProps & { ceceMode: string }) => (
+  onModeChange,
+}: HeaderButtonsProps & { ceceMode: string, onModeChange: (mode: string) => void }) => (
   <Box {...sidebarStyles.sidebar.content}>
-    <CeceHeader ceceMode={ceceMode} />
+    <CeceHeader ceceMode={ceceMode} onModeChange={onModeChange} />
     <Box {...sidebarStyles.sidebar.header}>
       <HeaderButtons
         onSettingsOpen={onSettingsOpen}
@@ -207,6 +210,19 @@ function Sidebar({ isCollapsed = false, onToggle }: SidebarProps): JSX.Element {
 
   const [ceceMode, setCeceMode] = useState('customer');
 
+  const handleModeChange = (mode: string) => {
+    const baseUrl = localStorage.getItem('baseUrl') || '';
+    setCeceMode(mode);
+    fetch(`${baseUrl}/api/mode`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ mode }),
+    })
+      .then((r) => r.json())
+      .then((d) => setCeceMode(d.mode || mode))
+      .catch(() => {});
+  };
+
   useEffect(() => {
     const baseUrl = localStorage.getItem('baseUrl') || '';
     fetch(`${baseUrl}/api/mode`)
@@ -235,6 +251,7 @@ function Sidebar({ isCollapsed = false, onToggle }: SidebarProps): JSX.Element {
           currentMode={currentMode}
           isElectron={isElectron}
           ceceMode={ceceMode}
+          onModeChange={handleModeChange}
         />
       )}
 
