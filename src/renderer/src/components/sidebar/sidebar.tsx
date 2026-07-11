@@ -11,6 +11,7 @@ import BottomTab from './bottom-tab';
 import HistoryDrawer from './history-drawer';
 import { useSidebar } from '@/hooks/sidebar/use-sidebar';
 import GroupDrawer from './group-drawer';
+import ScenarioPicker from './scenario-picker';
 import { ModeType } from '@/context/mode-context';
 
 interface SidebarProps {
@@ -190,6 +191,7 @@ const SidebarContent = memo(({
         isElectron={isElectron}
       />
     </Box>
+    {ceceMode === 'training' && <ScenarioPicker />}
     <ChatHistoryPanel />
     <BottomTab />
   </Box>

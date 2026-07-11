@@ -18,3 +18,21 @@ body, html {
   background: rgba(118, 185, 0, 0.3);
   color: #fff;
 }
+
+@keyframes kioskWaveform {
+  0%, 100% { height: 8px; }
+  50% { height: 36px; }
+}
+
+.kiosk-waveform-bar {
+  animation: kioskWaveform 0.8s ease-in-out infinite;
+}
+
+@keyframes kioskPulse {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.06); opacity: 1; }
+}
+
+.kiosk-pulse {
+  animation: kioskPulse 2.5s ease-in-out infinite;
+}

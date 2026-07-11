@@ -31,13 +31,17 @@ import WebSocketStatus from "./components/canvas/ws-status";
 import Subtitle from "./components/canvas/subtitle";
 import AIStateIndicator from "./components/footer/ai-state-indicator";
 import { ModeProvider, useMode } from "./context/mode-context";
+import { CeceModeProvider, useCeceMode } from "./context/cece-mode-context";
+import KioskOverlay from "./components/kiosk/kiosk-overlay";
 
 function AppContent(): JSX.Element {
   const [showSidebar, setShowSidebar] = useState(true);
   const [isFooterCollapsed, setIsFooterCollapsed] = useState(false);
   const { mode } = useMode();
+  const { ceceMode } = useCeceMode();
   const isElectron = window.api !== undefined;
   const live2dContainerRef = useRef<HTMLDivElement>(null);
+  const isKiosk = ceceMode === 'customer';
 
   useEffect(() => {
     const handleResize = () => {
@@ -100,7 +104,7 @@ function AppContent(): JSX.Element {
         // Apply styles conditionally based on mode
         // Use the function to get dynamic responsive styles for window mode
         {...(mode === "window"
-          ? getResponsiveLive2DWindowStyle(showSidebar)
+          ? getResponsiveLive2DWindowStyle(isKiosk ? false : showSidebar)
           : live2dPetStyle)}
       >
         <Live2D />
@@ -110,58 +114,67 @@ function AppContent(): JSX.Element {
       {mode === "window" && (
         <>
           {isElectron && <TitleBar />}
-          {/* Apply styles by spreading */}
           <Flex {...layoutStyles.appContainer}>
-            <Box
-              {...layoutStyles.sidebar}
-              {...(!showSidebar && { width: "24px" })}
-            >
-              <Sidebar
-                isCollapsed={!showSidebar}
-                onToggle={() => setShowSidebar(!showSidebar)}
-              />
-            </Box>
-            <Box {...layoutStyles.mainContent}>
-              <Background />
+            {!isKiosk && (
               <Box
-                position="absolute"
-                top="16px"
-                left="16px"
-                zIndex={10}
-                display="flex"
-                alignItems="center"
-                gap={0}
-                bg="rgba(15, 17, 23, 0.7)"
-                backdropFilter="blur(10px)"
-                borderRadius="20px"
-                border="1px solid rgba(255,255,255,0.08)"
-                overflow="hidden"
+                {...layoutStyles.sidebar}
+                {...(!showSidebar && { width: "24px" })}
               >
-                <WebSocketStatus />
-                <Box w="1px" h="16px" bg="rgba(255,255,255,0.1)" />
-                <AIStateIndicator />
-              </Box>
-              <Box
-                position="absolute"
-                bottom={isFooterCollapsed ? "39px" : "80px"}
-                left="50%"
-                transform="translateX(-50%)"
-                zIndex={10}
-                display="flex"
-                justifyContent="center"
-              >
-                <Subtitle />
-              </Box>
-              <Box
-                {...layoutStyles.footer}
-                zIndex={10}
-                {...(isFooterCollapsed && layoutStyles.collapsedFooter)}
-              >
-                <Footer
-                  isCollapsed={isFooterCollapsed}
-                  onToggle={() => setIsFooterCollapsed(!isFooterCollapsed)}
+                <Sidebar
+                  isCollapsed={!showSidebar}
+                  onToggle={() => setShowSidebar(!showSidebar)}
                 />
               </Box>
+            )}
+            <Box {...layoutStyles.mainContent}>
+              <Background />
+              {!isKiosk && (
+                <Box
+                  position="absolute"
+                  top="16px"
+                  left="16px"
+                  zIndex={10}
+                  display="flex"
+                  alignItems="center"
+                  gap={0}
+                  bg="rgba(15, 17, 23, 0.7)"
+                  backdropFilter="blur(10px)"
+                  borderRadius="20px"
+                  border="1px solid rgba(255,255,255,0.08)"
+                  overflow="hidden"
+                >
+                  <WebSocketStatus />
+                  <Box w="1px" h="16px" bg="rgba(255,255,255,0.1)" />
+                  <AIStateIndicator />
+                </Box>
+              )}
+              {isKiosk ? (
+                <KioskOverlay />
+              ) : (
+                <>
+                  <Box
+                    position="absolute"
+                    bottom={isFooterCollapsed ? "39px" : "80px"}
+                    left="50%"
+                    transform="translateX(-50%)"
+                    zIndex={10}
+                    display="flex"
+                    justifyContent="center"
+                  >
+                    <Subtitle />
+                  </Box>
+                  <Box
+                    {...layoutStyles.footer}
+                    zIndex={10}
+                    {...(isFooterCollapsed && layoutStyles.collapsedFooter)}
+                  >
+                    <Footer
+                      isCollapsed={isFooterCollapsed}
+                      onToggle={() => setIsFooterCollapsed(!isFooterCollapsed)}
+                    />
+                  </Box>
+                </>
+              )}
             </Box>
           </Flex>
         </>
@@ -178,7 +191,9 @@ function App(): JSX.Element {
     <ChakraProvider value={ceceSystem}>
       {/* ModeProvider needs to wrap AppContent to provide mode to getGlobalStyles */}
       <ModeProvider>
-        <AppWithGlobalStyles />
+        <CeceModeProvider>
+          <AppWithGlobalStyles />
+        </CeceModeProvider>
       </ModeProvider>
     </ChakraProvider>
   );
